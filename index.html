@@ -3,133 +3,270 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Softagon SIGAD — Baixar (Alfa)</title>
-<meta name="description" content="Softagon SIGAD — Sistema de Gestão Arquivística de Documentos. Offline-first, busca inteligente, assinatura ICP-Brasil. Baixe a versão Alfa para Windows e Linux.">
+<title>Softagon SIGAD — Nunca mais perca um documento da prefeitura</title>
+<meta name="description" content="Você salva um arquivo uma vez e ele aparece — e fica guardado — em todos os computadores do setor. Sem internet, sem nuvem de ninguém. Os dados da sua cidade ficam na sua cidade. Baixe grátis.">
 <link rel="icon" href="favicon.ico">
+<meta property="og:title" content="Nunca mais perca um documento da prefeitura.">
+<meta property="og:description" content="Salva uma vez, aparece em todos os computadores do setor. Sem internet, sem nuvem de ninguém. Baixe grátis.">
+<meta property="og:image" content="img/symbol.png">
 <style>
   :root{
-    --azul:#1593d3; --azul-esc:#0c2740; --laranja:#f7941e; --vermelho:#f15a3b;
-    --tinta:#0f2438; --muted:#5b7088; --linha:#e6edf3; --bg:#f4f8fb;
+    --azul:#1593d3; --azul2:#0e7ab8; --tinta:#0f2438; --muted:#5b7088;
+    --linha:#e6edf3; --bg:#f4f8fb; --verde:#1f9d57;
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--tinta);background:var(--bg);line-height:1.55;-webkit-font-smoothing:antialiased}
+  html{scroll-behavior:smooth}
+  body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--tinta);background:#fff;line-height:1.6;-webkit-font-smoothing:antialiased}
   a{color:inherit;text-decoration:none}
-  .wrap{max-width:1060px;margin:0 auto;padding:0 22px}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 22px}
+  h2{font-size:clamp(22px,3.4vw,30px);font-weight:800;line-height:1.2}
+  .center{text-align:center}
+  .muted{color:var(--muted)}
 
-  /* Topo */
-  header{display:flex;align-items:center;gap:12px;padding:20px 0}
-  header img{width:40px;height:40px}
-  .brand{font-weight:800;font-size:22px;color:var(--azul)}
-  .pill{font-size:11px;font-weight:700;letter-spacing:.06em;border:1px solid var(--linha);border-radius:8px;padding:3px 8px;color:#5b7088;text-transform:uppercase}
-  .pill.alfa{background:#fff7e6;border-color:#ffe2ad;color:#b9700b}
+  /* Barra sticky */
+  .top{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--linha)}
+  .top .wrap{display:flex;align-items:center;gap:12px;padding:10px 22px}
+  .top img{width:34px;height:34px}
+  .brand{font-weight:800;font-size:19px;color:var(--azul)}
+  .auth{font-size:12.5px;color:var(--muted);margin-left:2px}
+  .pill{font-size:10px;font-weight:700;letter-spacing:.06em;border:1px solid #ffe2ad;background:#fff7e6;color:#b9700b;border-radius:7px;padding:2px 7px;text-transform:uppercase}
+  .top .cta{margin-left:auto}
+  .btn{display:inline-flex;align-items:center;gap:9px;font-weight:700;border-radius:13px;padding:12px 20px;font-size:15px;transition:transform .12s,box-shadow .12s;cursor:pointer;border:0}
+  .btn:hover{transform:translateY(-2px)}
+  .btn-verde{background:var(--verde);color:#fff;box-shadow:0 8px 20px rgba(31,157,87,.32)}
+  .btn-sm{padding:9px 16px;font-size:14px}
+  .btn small{display:block;font-weight:500;font-size:11.5px;opacity:.85}
 
   /* Hero */
-  .hero{background:radial-gradient(120% 120% at 50% -10%,#11406b 0%,#0c2740 55%,#081a2c 100%);color:#fff;border-radius:28px;margin:8px 0 40px;padding:56px 24px;text-align:center;position:relative;overflow:hidden}
-  .hero img.sym{width:96px;height:96px;filter:drop-shadow(0 8px 24px rgba(0,0,0,.35));margin-bottom:18px}
-  .hero h1{font-size:clamp(28px,5vw,46px);font-weight:800;line-height:1.1;max-width:18ch;margin:0 auto 14px}
-  .hero p{color:#bcd2e6;max-width:56ch;margin:0 auto 28px;font-size:17px}
-  .cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
-  .btn{display:inline-flex;align-items:center;gap:10px;font-weight:700;border-radius:14px;padding:14px 22px;font-size:15px;transition:transform .12s ease,box-shadow .12s ease}
-  .btn:hover{transform:translateY(-2px)}
-  .btn-azul{background:var(--azul);color:#fff;box-shadow:0 10px 24px rgba(21,147,211,.35)}
-  .btn-ghost{background:rgba(255,255,255,.08);color:#fff;border:1px solid rgba(255,255,255,.2)}
-  .btn small{display:block;font-weight:500;font-size:12px;opacity:.8;margin-top:1px}
-  .hero .obs{margin-top:18px;font-size:12.5px;color:#8fa9c2}
+  .hero{background:radial-gradient(120% 120% at 50% -10%,#11406b 0%,#0c2740 55%,#081a2c 100%);color:#fff;text-align:center;padding:64px 22px 72px}
+  .hero img.sym{width:84px;height:84px;filter:drop-shadow(0 8px 24px rgba(0,0,0,.35));margin-bottom:20px}
+  .hero h1{font-size:clamp(30px,5.6vw,52px);font-weight:800;line-height:1.08;max-width:16ch;margin:0 auto 18px}
+  .hero .lead{color:#cfe0ef;max-width:54ch;margin:0 auto 30px;font-size:clamp(16px,2.2vw,19px)}
+  .hero .lead b{color:#fff}
+  .micro{margin-top:14px;font-size:13px;color:#9fb6cc}
+  .micro b{color:#cfe0ef}
+  .also{margin-top:10px;font-size:13px}
+  .also a{color:#7fc4ec;border-bottom:1px dashed rgba(127,196,236,.5)}
 
-  /* Downloads */
-  h2{font-size:24px;font-weight:800;text-align:center;margin-bottom:6px}
-  .sub{text-align:center;color:#5b7088;margin-bottom:28px}
-  .cards{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-  @media(max-width:720px){.cards{grid-template-columns:1fr}}
-  .card{background:#fff;border:1px solid var(--linha);border-radius:20px;padding:26px}
-  .card .os{display:flex;align-items:center;gap:12px;margin-bottom:8px}
-  .os .ic{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;color:#fff;font-weight:800;font-size:18px}
+  section{padding:56px 0}
+  .alt{background:var(--bg)}
+  .lead-sub{max-width:60ch;margin:8px auto 0;font-size:16px}
+
+  /* Dor */
+  .dor{max-width:680px;margin:26px auto 0;display:grid;gap:12px}
+  .dor li{list-style:none;background:#fff;border:1px solid var(--linha);border-left:3px solid #f0a23b;border-radius:12px;padding:13px 16px;font-size:15.5px}
+  .dor li b{color:var(--tinta)}
+  .punch{max-width:60ch;margin:24px auto 0;text-align:center;font-size:18px;font-weight:700}
+
+  /* Passos */
+  .steps{max-width:680px;margin:24px auto 0;display:grid;gap:14px}
+  .step{display:flex;gap:14px;align-items:flex-start;background:#fff;border:1px solid var(--linha);border-radius:14px;padding:16px}
+  .step .n{flex:none;width:30px;height:30px;border-radius:50%;background:var(--azul);color:#fff;font-weight:800;display:grid;place-items:center;font-size:15px}
+  .step p{font-size:15.5px}
+  .analogia{max-width:60ch;margin:22px auto 0;text-align:center;background:#eaf4fb;border:1px solid #cfe6f5;border-radius:14px;padding:16px 20px;font-size:16px}
+
+  /* Cenário */
+  .cen{max-width:680px;margin:0 auto;font-size:16.5px}
+  .cen .big{font-size:20px;font-weight:700;margin-bottom:10px}
+  .cen blockquote{margin:22px 0 0;background:#fff;border:1px solid var(--linha);border-left:4px solid var(--verde);border-radius:12px;padding:16px 20px;font-size:16px}
+
+  /* Benefícios */
+  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:28px}
+  @media(max-width:760px){.grid{grid-template-columns:1fr}}
+  .b{display:flex;gap:14px;background:#fff;border:1px solid var(--linha);border-radius:14px;padding:18px}
+  .b .e{font-size:24px;line-height:1}
+  .b h4{font-size:16px;margin-bottom:2px}
+  .b p{font-size:14px;color:var(--muted)}
+
+  /* Download */
+  .cards{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:28px}
+  @media(max-width:760px){.cards{grid-template-columns:1fr}}
+  .card{background:#fff;border:1px solid var(--linha);border-radius:18px;padding:24px}
+  .card .os{display:flex;align-items:center;gap:12px;margin-bottom:6px}
+  .os .ic{width:40px;height:40px;border-radius:11px;display:grid;place-items:center;color:#fff;font-weight:800;font-size:18px}
   .ic.win{background:#0078d4}.ic.lin{background:#dd4814}
-  .card h3{font-size:19px}
-  .card .req{color:#5b7088;font-size:13.5px;margin:10px 0 18px}
+  .card h3{font-size:18px}
+  .card .req{color:var(--muted);font-size:13.5px;margin:8px 0 16px}
   .card .req b{color:var(--tinta)}
-  .dlrow{display:flex;gap:10px;flex-wrap:wrap}
-  .dl{flex:1;min-width:160px;justify-content:center;background:var(--tinta);color:#fff}
-  .dl:hover{background:#0b1c2e}
-  .how{font-size:12.5px;color:#5b7088;margin-top:12px;background:var(--bg);border-radius:10px;padding:10px 12px;border:1px solid var(--linha)}
+  .dl{width:100%;justify-content:center;background:var(--tinta);color:#fff}
+  .dl.win{background:var(--verde)}
+  .dl:hover{filter:brightness(1.06)}
+  .how{font-size:12.5px;color:var(--muted);margin-top:12px;background:var(--bg);border:1px solid var(--linha);border-radius:10px;padding:9px 12px}
   code{font-family:ui-monospace,Menlo,Consolas,monospace;background:#eef4f9;padding:1px 6px;border-radius:6px;font-size:12.5px}
 
-  /* Features */
-  .feat{margin:48px 0}
-  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-  @media(max-width:720px){.grid{grid-template-columns:1fr}}
-  .f{background:#fff;border:1px solid var(--linha);border-radius:16px;padding:20px}
-  .f .e{font-size:22px;margin-bottom:8px}
-  .f h4{font-size:15px;margin-bottom:4px}
-  .f p{font-size:13.5px;color:#5b7088}
+  /* FAQ */
+  .faq{max-width:740px;margin:24px auto 0;display:grid;gap:12px}
+  details{background:#fff;border:1px solid var(--linha);border-radius:12px;padding:4px 18px}
+  summary{cursor:pointer;font-weight:700;padding:14px 0;list-style:none;font-size:15.5px}
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:"+";float:right;color:var(--azul);font-weight:800}
+  details[open] summary::after{content:"–"}
+  details p{padding:0 0 16px;color:#445;font-size:15px}
 
-  footer{text-align:center;color:#8195a8;font-size:13px;padding:34px 0 50px;border-top:1px solid var(--linha);margin-top:40px}
-  footer .alfa-note{background:#fff7e6;border:1px solid #ffe2ad;color:#9a5d08;border-radius:12px;padding:12px 16px;max-width:60ch;margin:0 auto 18px;font-size:13px}
+  /* Quem somos */
+  .quem{max-width:62ch;margin:0 auto;text-align:center;font-size:17px}
+  .quem .logos{margin-top:16px;color:var(--muted);font-size:14px}
+
+  /* CTA final */
+  .final{background:radial-gradient(120% 120% at 50% 0,#11406b,#0c2740);color:#fff;text-align:center;border-radius:0}
+  .final h2{color:#fff}
+  .final p{color:#cfe0ef;max-width:52ch;margin:10px auto 26px;font-size:17px}
+  .final .micro{color:#9fb6cc}
+
+  footer{text-align:center;color:#8195a8;font-size:13px;padding:30px 0 46px}
+  .alfa-note{background:#fff7e6;border:1px solid #ffe2ad;color:#9a5d08;border-radius:12px;padding:11px 16px;max-width:62ch;margin:0 auto 16px;font-size:13px}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <header>
+
+<!-- 0. Barra do topo: autoridade + CTA sempre visível -->
+<div class="top">
+  <div class="wrap">
     <img src="img/symbol.png" alt="Softagon">
     <span class="brand">softagon</span>
-    <span class="pill">SIGAD</span>
-    <span class="pill alfa">Alfa</span>
-  </header>
+    <span class="auth">· 24 anos cuidando da tecnologia de prefeituras</span>
+    <span class="pill">Alfa</span>
+    <a class="btn btn-verde btn-sm cta" href="#baixar">⬇ Baixar grátis</a>
+  </div>
+</div>
 
-  <section class="hero">
-    <img class="sym" src="img/symbol.png" alt="">
-    <h1>O acervo do seu setor, do começo ao fim.</h1>
-    <p>SIGAD offline-first para o setor público: a pasta mágica sincroniza os documentos entre os
-       computadores na rede local, com busca inteligente e assinatura digital ICP-Brasil.</p>
-    <div class="cta">
-      <a class="btn btn-azul" href="#download">⬇ Baixar agora</a>
-      <a class="btn btn-ghost" href="#recursos">Ver recursos</a>
+<!-- 1. HERO -->
+<section class="hero">
+  <img class="sym" src="img/symbol.png" alt="">
+  <h1>Nunca mais perca um documento da prefeitura.</h1>
+  <p class="lead">Você salva um arquivo uma vez. Na mesma hora, ele aparece — e fica guardado — em
+     <b>todos os computadores do setor</b>. Sem internet, sem nuvem de ninguém.
+     <b>Os dados da sua cidade ficam na sua cidade.</b></p>
+  <a class="btn btn-verde" href="#baixar">⬇ Baixar grátis para Windows <small>Grátis · sem cartão · 2 minutos</small></a>
+  <p class="micro"><b>Grátis de verdade.</b> Sem cartão. Instala em 2 minutos e funciona offline.</p>
+  <p class="also">Usa Linux? <a href="#baixar">Tem versão para Ubuntu também.</a></p>
+</section>
+
+<!-- 2. A DOR -->
+<section>
+  <div class="wrap">
+    <h2 class="center">Reconhece isto?</h2>
+    <ul class="dor">
+      <li>O documento estava <b>“no computador da Maria”</b> — e a Maria saiu de férias.</li>
+      <li>O PC do setor <b>queimou</b> e levou anos de arquivos junto.</li>
+      <li>Mandaram a versão errada <b>por WhatsApp</b> e ninguém sabe qual é a certa.</li>
+      <li>Precisou de um ofício de 2019 e foram <b>30 minutos cavando pastas</b> — e não achou.</li>
+      <li>Alguém <b>apagou sem querer</b> e não tinha cópia.</li>
+    </ul>
+    <p class="punch">A pasta do Windows nunca foi feita para guardar os documentos de uma prefeitura.
+       E todo mundo sente isso na pele.</p>
+  </div>
+</section>
+
+<!-- 3. EXPLICA SIMPLES -->
+<section class="alt">
+  <div class="wrap">
+    <h2 class="center">Em palavras simples: como funciona</h2>
+    <p class="muted center lead-sub">Imagine um <b>caderno mágico</b>: você escreve numa folha e, no mesmo
+       instante, a mesma folha aparece igualzinha em todos os cadernos do prédio. Se um caderno se perde,
+       os outros têm tudo.</p>
+    <div class="steps">
+      <div class="step"><div class="n">1</div><p>Você <b>salva o arquivo</b> numa pasta, como sempre fez.</p></div>
+      <div class="step"><div class="n">2</div><p>Ele <b>aparece sozinho</b> em todos os outros computadores do setor.</p></div>
+      <div class="step"><div class="n">3</div><p>Agora o documento está <b>guardado em vários lugares ao mesmo tempo</b>.</p></div>
+      <div class="step"><div class="n">4</div><p>Um computador quebrou, foi roubado ou está desligado? <b>Os outros continuam com tudo.</b></p></div>
     </div>
-    <p class="obs">Versão <b>0.1.0-alpha</b> · teste · Windows 11 e Ubuntu 24.04</p>
-  </section>
+    <p class="analogia"><b>Não existe mais “o computador que tinha o arquivo”. O arquivo está em todos.</b></p>
+  </div>
+</section>
 
-  <section id="download">
-    <h2>Baixar</h2>
-    <p class="sub">Escolha o seu sistema. É um teste (Alfa) — relate o que achar.</p>
+<!-- 4. O CENÁRIO -->
+<section>
+  <div class="wrap cen">
+    <h2 class="center" style="margin-bottom:18px">Uma prefeitura com 10 computadores</h2>
+    <p class="big">A funcionária do protocolo salva um ofício. Em segundos, os outros 9 computadores já têm o mesmo ofício.</p>
+    <p>Agora esse documento existe em <b>10 lugares ao mesmo tempo</b>. Pode quebrar 1, 2, 5 máquinas —
+       o acervo continua de pé.</p>
+    <blockquote><b>Quanto mais computadores o seu órgão tem, mais protegidos ficam os seus documentos.</b>
+       Cada máquina é mais uma cópia viva, se atualizando sozinha.</blockquote>
+  </div>
+</section>
+
+<!-- 5. BENEFÍCIOS -->
+<section class="alt">
+  <div class="wrap">
+    <h2 class="center">O que você ganha</h2>
+    <div class="grid">
+      <div class="b"><div class="e">🔒</div><div><h4>É seu e fica com você</h4><p>Os documentos não saem dos computadores da prefeitura. Sem nuvem de empresa, sem servidor em outro país. Você é o dono.</p></div></div>
+      <div class="b"><div class="e">💾</div><div><h4>Backup que se faz sozinho</h4><p>Toda vez que você salva, a cópia já está nas outras máquinas. Ninguém precisa lembrar de fazer backup.</p></div></div>
+      <div class="b"><div class="e">♻️</div><div><h4>Apagou sem querer? Recupera</h4><p>Tem lixeira e histórico: dá para voltar o que foi apagado ou alterado por engano.</p></div></div>
+      <div class="b"><div class="e">🔎</div><div><h4>Acha em segundos</h4><p>Busca por qualquer palavra dentro dos documentos — até nos escaneados, e mesmo digitando errado.</p></div></div>
+      <div class="b"><div class="e">🌐</div><div><h4>Funciona sem internet</h4><p>Tudo roda dentro da rede do seu órgão. Caiu a internet? O trabalho continua.</p></div></div>
+      <div class="b"><div class="e">🤫</div><div><h4>Você decide o que compartilhar</h4><p>Cada setor vê só o que é dele. Documento sigiloso fica fechado. Compartilhar é escolha sua.</p></div></div>
+      <div class="b"><div class="e">⚖️</div><div><h4>Dentro da lei</h4><p>Integridade, trilha de quem mexeu e organização do jeito que a lei de arquivos exige.</p></div></div>
+      <div class="b"><div class="e">💻</div><div><h4>Roda no que você já tem</h4><p>Leve. Funciona até em computador antigo e fraco.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 6. O UAU + DOWNLOAD -->
+<section id="baixar">
+  <div class="wrap">
+    <h2 class="center">Veja com seus próprios olhos</h2>
+    <p class="muted center lead-sub"><b>Desligue a internet.</b> Salve um arquivo num computador.
+       Olhe para o outro: ele já está lá. Faça o teste no seu próprio setor, hoje.</p>
     <div class="cards">
-      <!-- Windows -->
       <div class="card">
         <div class="os"><div class="ic win">⊞</div><h3>Windows 11</h3></div>
-        <p class="req">Requer <b>Windows 11</b> (64-bit). <b>Windows 10 não é suportado.</b> Instala sem precisar de administrador.</p>
-        <div class="dlrow">
-          <a class="btn dl" id="win-dl" href="https://github.com/SoftagonSistemas/sigad-download/releases/latest/download/softagon-sigad_0.1.0-alpha_x64-setup.exe">⬇ Baixar .exe <small>instalador</small></a>
-        </div>
-        <p class="how">Baixe e execute o <code>.exe</code>. O atalho aparece na Área de Trabalho e no Menu Iniciar.</p>
+        <p class="req">Para <b>Windows 11</b> (64-bit). Instala sem precisar de administrador, em 2 minutos.</p>
+        <a class="btn dl win" id="win-dl" href="https://github.com/SoftagonSistemas/sigad-download/releases/latest/download/softagon-sigad_0.1.0-alpha_x64-setup.exe">⬇ Baixar grátis para Windows</a>
+        <p class="how">Baixe e execute. O atalho aparece na Área de Trabalho e no Menu Iniciar.</p>
       </div>
-      <!-- Linux -->
       <div class="card">
         <div class="os"><div class="ic lin">🐧</div><h3>Ubuntu / Linux</h3></div>
-        <p class="req">Testado no <b>Ubuntu 24.04</b> (64-bit). O OCR (Tesseract/poppler) é instalado junto.</p>
-        <div class="dlrow">
-          <a class="btn dl" id="deb-dl" href="https://github.com/SoftagonSistemas/sigad-download/releases/latest/download/softagon-sigad_0.1.0-alpha_amd64.deb">⬇ Baixar .deb <small>pacote</small></a>
-        </div>
+        <p class="req">Para <b>Ubuntu 24.04</b> (64-bit). Instala junto tudo o que precisa.</p>
+        <a class="btn dl" id="deb-dl" href="https://github.com/SoftagonSistemas/sigad-download/releases/latest/download/softagon-sigad_0.1.0-alpha_amd64.deb">⬇ Baixar para Ubuntu</a>
         <p class="how">Instale com: <code>sudo apt install ./softagon-sigad_0.1.0-alpha_amd64.deb</code></p>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section id="recursos" class="feat">
-    <h2>O que ele faz</h2>
-    <p class="sub">O essencial do arquivo público, leve o bastante para rodar em máquinas modestas.</p>
-    <div class="grid">
-      <div class="f"><div class="e">📁</div><h4>Pasta mágica</h4><p>Salve um documento e ele aparece nos outros computadores do órgão, na hora, na rede local.</p></div>
-      <div class="f"><div class="e">🔌</div><h4>Funciona offline</h4><p>Sem internet, sem servidor. P2P entre as máquinas (Syncthing), tudo no local.</p></div>
-      <div class="f"><div class="e">🔎</div><h4>Busca inteligente</h4><p>Acha mesmo digitando errado ("homologaçao" → homologação). Melhor que a busca do Windows.</p></div>
-      <div class="f"><div class="e">🖊️</div><h4>Assinatura ICP-Brasil</h4><p>Assina com certificado A1 (.pfx) e carimba o PDF com data/hora — validade legal.</p></div>
-      <div class="f"><div class="e">🔒</div><h4>Sigilo por secretaria</h4><p>Documentos sensíveis cifrados; só a secretaria certa abre. Trilha de auditoria com hash.</p></div>
-      <div class="f"><div class="e">📨</div><h4>Protocolo & tramitação</h4><p>Número de protocolo, encaminhamento entre setores, prazos e pendências.</p></div>
+<!-- 7. TIRA O MEDO -->
+<section class="alt">
+  <div class="wrap">
+    <h2 class="center">Antes de baixar, tirando as dúvidas</h2>
+    <div class="faq">
+      <details><summary>É difícil de instalar?</summary><p>Não. Instala em 2 minutos, como qualquer programa de Windows. Se você usa a pasta do Windows, você já sabe usar isto.</p></details>
+      <details><summary>Meus documentos vão para a internet?</summary><p>Não. Eles ficam só nos computadores do seu órgão. Nada é enviado para fora.</p></details>
+      <details><summary>E se eu apagar sem querer?</summary><p>Tem lixeira e histórico. Dá para recuperar.</p></details>
+      <details><summary>Preciso de um servidor caro ou de um TI?</summary><p>Não. Roda nos computadores que você já tem, mesmo os mais fracos.</p></details>
+      <details><summary>É realmente grátis? Qual a pegadinha?</summary><p>A versão local é grátis, de verdade. Mais tarde, se o órgão quiser backup fora do prédio, acesso de casa ou site público, existe uma versão paga — mas você nunca é obrigado. E seus documentos são seus: dá para exportar quando quiser.</p></details>
     </div>
-  </section>
+  </div>
+</section>
 
-  <footer>
-    <div class="alfa-note">⚠️ <b>Versão Alfa (teste).</b> Pode conter instabilidades — use para avaliação. Seus documentos ficam no seu computador.</div>
-    Softagon SIGAD · Softagon Sistemas · feito para prefeituras, câmaras e órgãos públicos.
-  </footer>
-</div>
+<!-- 8. QUEM SOMOS -->
+<section>
+  <div class="wrap quem">
+    <h2 class="center" style="margin-bottom:14px">Feito por quem conhece prefeitura</h2>
+    <p>A <b>Softagon Sistemas</b> desenvolve tecnologia para o setor público há <b>24 anos</b>.
+       Prefeituras e câmaras de todo o país já usam nossos sistemas no dia a dia.</p>
+    <p class="logos">CIA · SAPL · EduPrime — e agora o <b>SIGAD</b>.</p>
+  </div>
+</section>
+
+<!-- 9. CTA FINAL -->
+<section class="final">
+  <div class="wrap">
+    <h2>Comece hoje. Seu próximo documento já fica seguro.</h2>
+    <p>Baixe grátis, instale em 2 minutos e pare de perder documento — a partir de agora.</p>
+    <a class="btn btn-verde" href="#baixar">⬇ Baixar grátis para Windows</a>
+    <p class="micro">Grátis · Sem cartão · Funciona offline · Seus dados, sob seu controle.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="alfa-note">⚠️ <b>Versão Alfa (avaliação).</b> Pode conter instabilidades — use para testar. Seus documentos ficam no seu computador.</div>
+    Softagon SIGAD · Softagon Sistemas (GovTech, 24 anos) · para prefeituras, câmaras e órgãos públicos.
+  </div>
+</footer>
+
 </body>
 </html>
