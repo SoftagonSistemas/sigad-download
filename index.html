@@ -139,6 +139,73 @@
   footer{text-align:center;color:#8195a8;font-size:13px;padding:30px 0 46px}
   .alfa-note{background:#fff7e6;border:1px solid #ffe2ad;color:#9a5d08;border-radius:12px;padding:11px 16px;max-width:62ch;margin:0 auto 16px;font-size:13px}
 
+  /* ===== Recursos ilustrados (busca, OCR, assinatura, proteção) ===== */
+  .feat{display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:center;margin-top:38px}
+  .feat.alt .ill{order:2}
+  .feat-txt .tag{display:inline-block;font-size:11.5px;font-weight:700;color:var(--azul);background:#eaf4fb;border-radius:7px;padding:3px 10px;margin-bottom:11px;letter-spacing:.05em;text-transform:uppercase}
+  .feat-txt h3{font-size:clamp(19px,2.6vw,24px);font-weight:800;line-height:1.22;margin-bottom:9px}
+  .feat-txt p{color:var(--muted);font-size:15.5px}
+  .feat-txt p b{color:var(--tinta)}
+  .ill{position:relative;height:240px;background:linear-gradient(180deg,#fff,#f4fafe);border:1px solid var(--linha);border-radius:18px;overflow:hidden;box-shadow:0 16px 44px -30px rgba(15,36,56,.5);display:grid;place-items:center}
+  .mini-doc{width:94px;height:120px;background:#fff;border:1.5px solid #d4e2ee;border-radius:9px;padding:14px 12px;box-shadow:0 10px 24px -14px rgba(15,36,56,.4)}
+  .mini-doc i{display:block;height:5px;border-radius:3px;background:#dde8f1;margin-bottom:8px}
+  .mini-doc i.s{width:58%}
+
+  /* 1. Busca */
+  .ill-busca{flex-direction:column;gap:14px;padding:20px}
+  .sbar{display:flex;align-items:center;gap:9px;width:90%;max-width:300px;background:#fff;border:1.5px solid #cfe0ee;border-radius:11px;padding:11px 14px;box-shadow:0 8px 20px -12px rgba(15,36,56,.32)}
+  .sbar .mag{font-size:16px}
+  .sbar .q{font-size:15px;font-weight:600;color:var(--tinta)}
+  .sbar .q::after{content:"";display:inline-block;width:2px;height:15px;background:var(--azul);margin-left:1px;vertical-align:-2px;animation:caret 1s steps(1) infinite}
+  @keyframes caret{50%{opacity:0}}
+  .sres{width:90%;max-width:300px;background:#fff;border:1px solid var(--linha);border-radius:11px;padding:11px 13px;display:flex;gap:10px;align-items:flex-start;animation:apar 4s ease-in-out infinite}
+  @keyframes apar{0%,16%{opacity:0;transform:translateY(10px)}30%,88%{opacity:1;transform:translateY(0)}100%{opacity:0;transform:translateY(10px)}}
+  .sres .ed{font-size:18px}
+  .sres b{font-size:13.5px}
+  .sres small{display:block;color:var(--muted);font-size:12px;margin-top:2px}
+  .sres mark{background:#fff1c9;color:#7a5b00;border-radius:3px;padding:0 2px}
+
+  /* 2. OCR */
+  .ill-ocr{display:flex;align-items:center;gap:16px;padding:18px}
+  .scanbox{position:relative;width:104px;height:130px;border-radius:10px;overflow:hidden;border:1.5px solid #d4e2ee;background:#eef3f8;box-shadow:0 10px 24px -14px rgba(15,36,56,.4)}
+  .scanbox .pic{position:absolute;inset:9px;background:repeating-linear-gradient(0deg,#b9c8d6 0 3px,transparent 3px 11px);opacity:.6;border-radius:3px}
+  .scanbox .line{position:absolute;left:0;right:0;height:20px;background:linear-gradient(180deg,rgba(31,157,87,0),rgba(31,157,87,.55),rgba(31,157,87,0));box-shadow:0 0 14px rgba(31,157,87,.7);animation:scan 3s ease-in-out infinite}
+  @keyframes scan{0%{top:-20px}50%{top:130px}100%{top:-20px}}
+  .ocr-arrow{font-size:20px;color:var(--verde);font-weight:800}
+  .ocr-out{width:104px;height:130px;background:#fff;border:1.5px solid var(--verde);border-radius:10px;padding:14px 12px;box-shadow:0 10px 24px -14px rgba(31,157,87,.3)}
+  .ocr-out i{display:block;height:5px;border-radius:3px;background:#bfe6cf;margin-bottom:8px;animation:reconh 3s ease-out infinite}
+  .ocr-out i.s{width:55%}
+  .ocr-out i:nth-child(2){animation-delay:.25s}.ocr-out i:nth-child(3){animation-delay:.5s}
+  .ocr-out i:nth-child(4){animation-delay:.75s}.ocr-out i:nth-child(5){animation-delay:1s}
+  @keyframes reconh{0%,15%{transform:scaleX(0);transform-origin:left}55%,100%{transform:scaleX(1);transform-origin:left}}
+
+  /* 3. Assinatura */
+  .ill-assina{padding:20px}
+  .assina-wrap{position:relative}
+  .seal{position:absolute;right:-22px;bottom:-14px;width:78px;height:78px;border-radius:50%;border:3px solid var(--verde);background:rgba(31,157,87,.07);color:var(--verde);display:grid;place-items:center;text-align:center;font-size:10px;font-weight:800;line-height:1.15;animation:carimbo 3.6s ease-in-out infinite}
+  @keyframes carimbo{0%,28%{transform:scale(2.5) rotate(-20deg);opacity:0}44%{transform:scale(1) rotate(-11deg);opacity:1}88%{transform:scale(1) rotate(-11deg);opacity:1}100%{opacity:0}}
+  .assina-badge{position:absolute;left:50%;bottom:-20px;transform:translateX(-50%);white-space:nowrap;background:var(--verde);color:#fff;font-size:11.5px;font-weight:700;border-radius:20px;padding:5px 12px;box-shadow:0 8px 18px -8px rgba(31,157,87,.6);opacity:0;animation:badgein 3.6s ease-in-out infinite}
+  @keyframes badgein{0%,48%{opacity:0;transform:translateX(-50%) translateY(6px)}60%,90%{opacity:1;transform:translateX(-50%) translateY(0)}100%{opacity:0}}
+
+  /* 4. Proteção */
+  .ill-protege{display:flex;align-items:center;gap:18px;padding:18px}
+  .doc-sig{position:relative}
+  .doc-sig .selo{position:absolute;top:8px;left:50%;transform:translateX(-50%);font-size:8.5px;font-weight:800;letter-spacing:.05em;color:#b53a2b;border:1.5px solid #e6a99f;background:#fdecea;border-radius:4px;padding:1px 5px}
+  .lock{width:66px;height:74px}
+  .lock .corpo{fill:#c9d6e2;animation:travacor 3s ease-in-out infinite}
+  @keyframes travacor{0%,42%{fill:#c9d6e2}56%,100%{fill:var(--verde)}}
+  .lock .arco{fill:none;stroke:#9fb1c2;stroke-width:6;animation:travaarco 3s ease-in-out infinite}
+  @keyframes travaarco{0%,42%{transform:translateY(-7px);stroke:#9fb1c2}56%,100%{transform:translateY(0);stroke:var(--verde)}}
+  .lock .buraco{fill:#fff}
+  .protege-who{font-size:12.5px;color:var(--muted);max-width:120px}
+  .protege-who b{color:var(--tinta)}
+
+  @media(max-width:760px){
+    .feat{grid-template-columns:1fr;gap:16px}
+    .feat .ill,.feat.alt .ill{order:-1}
+    .ill{height:210px}
+  }
+
   /* Responsivo */
   @media(max-width:680px){
     .auth{display:none}
@@ -262,6 +329,81 @@
       <div class="b"><div class="e">🤫</div><div><h4>Você decide o que compartilhar</h4><p>Cada setor vê só o que é dele. Documento sigiloso fica fechado. Compartilhar é escolha sua.</p></div></div>
       <div class="b"><div class="e">⚖️</div><div><h4>Dentro da lei</h4><p>Integridade, trilha de quem mexeu e organização do jeito que a lei de arquivos exige.</p></div></div>
       <div class="b"><div class="e">💻</div><div><h4>Roda no que você já tem</h4><p>Leve. Funciona até em computador antigo e fraco.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 5b. RECURSOS ILUSTRADOS -->
+<section id="recursos">
+  <div class="wrap">
+    <h2 class="center">Não é só guardar. É cuidar de cada documento.</h2>
+    <p class="muted center lead-sub">Busca que acha de verdade, lê papel escaneado, assina com validade
+       jurídica e tranca o que é sigiloso — tudo no mesmo lugar.</p>
+
+    <!-- Busca inteligente -->
+    <div class="feat">
+      <div class="ill ill-busca">
+        <div class="sbar"><span class="mag">🔎</span><span class="q">homologaçao</span></div>
+        <div class="sres"><span class="ed">📄</span><div><b>Decreto de <mark>homologação</mark> 2024</b><small>…processo de <mark>homologação</mark> da licitação nº 14…</small></div></div>
+      </div>
+      <div class="feat-txt">
+        <span class="tag">Busca inteligente</span>
+        <h3>Acha em segundos — mesmo digitando errado</h3>
+        <p>Procure por uma palavra e o SIGAD encontra, <b>mesmo sem acento ou com erro de digitação</b>.
+           “homologaçao” acha “homologação”. Muito melhor que a busca do Windows.</p>
+      </div>
+    </div>
+
+    <!-- OCR -->
+    <div class="feat alt">
+      <div class="ill ill-ocr">
+        <div class="scanbox"><div class="pic"></div><div class="line"></div></div>
+        <div class="ocr-arrow">➜</div>
+        <div class="ocr-out"><i></i><i class="s"></i><i></i><i></i><i class="s"></i></div>
+      </div>
+      <div class="feat-txt">
+        <span class="tag">Lê até escaneado</span>
+        <h3>Lê o texto de dentro de documentos escaneados</h3>
+        <p>Aquele ofício antigo, <b>escaneado como imagem</b>? O SIGAD lê o que está escrito nele e deixa
+           tudo pesquisável — você acha numa busca, como se fosse digitado.</p>
+      </div>
+    </div>
+
+    <!-- Assinatura digital -->
+    <div class="feat">
+      <div class="ill ill-assina">
+        <div class="assina-wrap">
+          <div class="mini-doc"><i></i><i></i><i class="s"></i><i></i><i class="s"></i></div>
+          <div class="seal">ASSINADO<br>✓<br>ICP-Brasil</div>
+          <div class="assina-badge">✔ Vale como papel assinado</div>
+        </div>
+      </div>
+      <div class="feat-txt">
+        <span class="tag">Assinatura digital</span>
+        <h3>Assine com validade jurídica, sem imprimir</h3>
+        <p>Assine documentos com seu <b>certificado digital (gov.br / ICP-Brasil)</b> — vale como papel
+           assinado, direto do computador. Dá para assinar vários de uma vez.</p>
+      </div>
+    </div>
+
+    <!-- Proteção dos sigilosos -->
+    <div class="feat alt">
+      <div class="ill ill-protege">
+        <div class="doc-sig"><div class="mini-doc"><span class="selo">SIGILOSO</span><i></i><i></i><i class="s"></i><i></i></div></div>
+        <svg class="lock" viewBox="0 0 64 74" aria-hidden="true">
+          <path class="arco" d="M20 32 V22 a12 12 0 0 1 24 0 V32" />
+          <rect class="corpo" x="12" y="32" width="40" height="36" rx="7" />
+          <circle class="buraco" cx="32" cy="48" r="4.2" />
+          <rect class="buraco" x="30.4" y="50" width="3.2" height="9" rx="1.6" />
+        </svg>
+        <div class="protege-who"><b>Só a secretaria certa abre.</b><br>Os outros nem veem o conteúdo.</div>
+      </div>
+      <div class="feat-txt">
+        <span class="tag">Sigilo protegido</span>
+        <h3>Documento sigiloso fica trancado</h3>
+        <p>Marcou como sigiloso? Ele é <b>protegido (cifrado)</b>: só quem tem permissão consegue abrir.
+           Mesmo quem está na rede não lê o conteúdo — seu risco de vazamento fica coberto (LGPD).</p>
+      </div>
     </div>
   </div>
 </section>
