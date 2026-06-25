@@ -30,25 +30,30 @@
   .brand{font-weight:800;font-size:19px;color:var(--azul)}
   .auth{font-size:12.5px;color:var(--muted);margin-left:2px}
   .pill{font-size:10px;font-weight:700;letter-spacing:.06em;border:1px solid #ffe2ad;background:#fff7e6;color:#b9700b;border-radius:7px;padding:2px 7px;text-transform:uppercase}
-  .top .cta{margin-left:auto}
-  .btn{display:inline-flex;align-items:center;gap:9px;font-weight:700;border-radius:13px;padding:12px 20px;font-size:15px;transition:transform .12s,box-shadow .12s;cursor:pointer;border:0}
+  .top .links{margin-left:auto;display:flex;align-items:center;gap:16px}
+  .top .nav{font-size:14px;font-weight:600;color:var(--muted)}
+  .top .nav:hover{color:var(--azul)}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;font-weight:700;border-radius:13px;padding:12px 20px;font-size:15px;transition:transform .12s,box-shadow .12s,filter .12s;cursor:pointer;border:0;text-align:center}
   .btn:hover{transform:translateY(-2px)}
   .btn-verde{background:var(--verde);color:#fff;box-shadow:0 8px 20px rgba(31,157,87,.32)}
+  .btn-azul{background:var(--azul);color:#fff;box-shadow:0 8px 20px rgba(21,147,211,.28)}
+  .btn-ghost{background:#fff;color:var(--tinta);border:1px solid var(--linha)}
   .btn-sm{padding:9px 16px;font-size:14px}
   .btn small{display:block;font-weight:500;font-size:11.5px;opacity:.85}
 
   /* Hero */
-  .hero{background:radial-gradient(120% 120% at 50% -10%,#11406b 0%,#0c2740 55%,#081a2c 100%);color:#fff;text-align:center;padding:64px 22px 72px}
+  .hero{background:radial-gradient(120% 120% at 50% -10%,#11406b 0%,#0c2740 55%,#081a2c 100%);color:#fff;text-align:center;padding:60px 22px 68px}
   .hero img.sym{width:84px;height:84px;filter:drop-shadow(0 8px 24px rgba(0,0,0,.35));margin-bottom:20px}
   .hero h1{font-size:clamp(30px,5.6vw,52px);font-weight:800;line-height:1.08;max-width:16ch;margin:0 auto 18px}
   .hero .lead{color:#cfe0ef;max-width:54ch;margin:0 auto 30px;font-size:clamp(16px,2.2vw,19px)}
   .hero .lead b{color:#fff}
+  .hero-ctas{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
   .micro{margin-top:14px;font-size:13px;color:#9fb6cc}
   .micro b{color:#cfe0ef}
   .also{margin-top:10px;font-size:13px}
   .also a{color:#7fc4ec;border-bottom:1px dashed rgba(127,196,236,.5)}
 
-  section{padding:56px 0}
+  section{padding:52px 0}
   .alt{background:var(--bg)}
   .lead-sub{max-width:60ch;margin:8px auto 0;font-size:16px}
 
@@ -65,10 +70,21 @@
   .step p{font-size:15.5px}
   .analogia{max-width:60ch;margin:22px auto 0;text-align:center;background:#eaf4fb;border:1px solid #cfe6f5;border-radius:14px;padding:16px 20px;font-size:16px}
 
-  /* Cenário */
-  .cen{max-width:680px;margin:0 auto;font-size:16.5px}
-  .cen .big{font-size:20px;font-weight:700;margin-bottom:10px}
-  .cen blockquote{margin:22px 0 0;background:#fff;border:1px solid var(--linha);border-left:4px solid var(--verde);border-radius:12px;padding:16px 20px;font-size:16px}
+  /* Animação da rede (a "mágica") */
+  .demo{max-width:760px;margin:26px auto 0}
+  .demo-stage{position:relative;background:linear-gradient(180deg,#fff,#f7fbfe);border:1px solid var(--linha);border-radius:20px;padding:10px;box-shadow:0 18px 50px -28px rgba(15,36,56,.4)}
+  canvas#rede{display:block;width:100%;aspect-ratio:16/10}
+  .demo-cap{display:flex;gap:12px;align-items:flex-start;max-width:62ch;margin:18px auto 0;min-height:58px;
+            background:#fff;border:1px solid var(--linha);border-radius:14px;padding:14px 18px}
+  .demo-cap .pin{flex:none;width:26px;height:26px;border-radius:50%;background:var(--verde);color:#fff;font-weight:800;display:grid;place-items:center;font-size:14px;transition:background .3s}
+  .demo-cap p{font-size:16px;font-weight:600}
+  .demo-cap p span{display:block;font-weight:400;color:var(--muted);font-size:14px}
+  .demo-legend{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin-top:14px;font-size:12.5px;color:var(--muted)}
+  .demo-legend i{width:11px;height:11px;border-radius:3px;display:inline-block;vertical-align:-1px;margin-right:5px}
+
+  /* Cenário (texto de apoio) */
+  .cen{max-width:680px;margin:26px auto 0;font-size:16.5px;text-align:center}
+  .cen blockquote{margin:18px 0 0;background:#fff;border:1px solid var(--linha);border-left:4px solid var(--verde);border-radius:12px;padding:16px 20px;font-size:16px;text-align:left}
 
   /* Benefícios */
   .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:28px}
@@ -77,6 +93,13 @@
   .b .e{font-size:24px;line-height:1}
   .b h4{font-size:16px;margin-bottom:2px}
   .b p{font-size:14px;color:var(--muted)}
+
+  /* Pitch CTA */
+  .pitch{background:linear-gradient(120deg,#0e7ab8,#1593d3);color:#fff;border-radius:20px;max-width:760px;margin:0 auto;
+         padding:30px 28px;display:flex;gap:22px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+  .pitch h3{font-size:clamp(19px,2.6vw,23px);font-weight:800}
+  .pitch p{color:#dbeefb;font-size:15px;margin-top:6px;max-width:46ch}
+  .pitch .btn{flex:none}
 
   /* Download */
   .cards{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:28px}
@@ -108,13 +131,26 @@
   .quem .logos{margin-top:16px;color:var(--muted);font-size:14px}
 
   /* CTA final */
-  .final{background:radial-gradient(120% 120% at 50% 0,#11406b,#0c2740);color:#fff;text-align:center;border-radius:0}
+  .final{background:radial-gradient(120% 120% at 50% 0,#11406b,#0c2740);color:#fff;text-align:center}
   .final h2{color:#fff}
   .final p{color:#cfe0ef;max-width:52ch;margin:10px auto 26px;font-size:17px}
   .final .micro{color:#9fb6cc}
 
   footer{text-align:center;color:#8195a8;font-size:13px;padding:30px 0 46px}
   .alfa-note{background:#fff7e6;border:1px solid #ffe2ad;color:#9a5d08;border-radius:12px;padding:11px 16px;max-width:62ch;margin:0 auto 16px;font-size:13px}
+
+  /* Responsivo */
+  @media(max-width:680px){
+    .auth{display:none}
+    .top .nav{display:none}
+    section{padding:42px 0}
+    .pitch{padding:24px 20px}
+    .demo-cap{min-height:74px}
+    canvas#rede{aspect-ratio:1/1}      /* mais alto no celular → anel maior, PCs legíveis */
+  }
+  @media(prefers-reduced-motion:reduce){
+    .btn:hover{transform:none}
+  }
 </style>
 </head>
 <body>
@@ -126,7 +162,11 @@
     <span class="brand">softagon</span>
     <span class="auth">· 24 anos cuidando da tecnologia de prefeituras</span>
     <span class="pill">Alfa</span>
-    <a class="btn btn-verde btn-sm cta" href="#baixar">⬇ Baixar grátis</a>
+    <span class="links">
+      <a class="nav" href="#como">Como funciona</a>
+      <a class="nav" href="pitch.html">Apresentação</a>
+      <a class="btn btn-verde btn-sm" href="#baixar">⬇ Baixar grátis</a>
+    </span>
   </div>
 </div>
 
@@ -137,7 +177,10 @@
   <p class="lead">Você salva um arquivo uma vez. Na mesma hora, ele aparece — e fica guardado — em
      <b>todos os computadores do setor</b>. Sem internet, sem nuvem de ninguém.
      <b>Os dados da sua cidade ficam na sua cidade.</b></p>
-  <a class="btn btn-verde" href="#baixar">⬇ Baixar grátis para Windows <small>Grátis · sem cartão · 2 minutos</small></a>
+  <div class="hero-ctas">
+    <a class="btn btn-verde" href="#baixar">⬇ Baixar grátis para Windows <small>Grátis · sem cartão · 2 minutos</small></a>
+    <a class="btn btn-ghost" href="#como" style="background:rgba(255,255,255,.08);color:#fff;border-color:rgba(255,255,255,.25)">▶ Ver como funciona</a>
+  </div>
   <p class="micro"><b>Grátis de verdade.</b> Sem cartão. Instala em 2 minutos e funciona offline.</p>
   <p class="also">Usa Linux? <a href="#baixar">Tem versão para Ubuntu também.</a></p>
 </section>
@@ -158,14 +201,33 @@
   </div>
 </section>
 
-<!-- 3. EXPLICA SIMPLES -->
-<section class="alt">
+<!-- 3. EXPLICA SIMPLES + ANIMAÇÃO -->
+<section class="alt" id="como">
   <div class="wrap">
     <h2 class="center">Em palavras simples: como funciona</h2>
     <p class="muted center lead-sub">Imagine um <b>caderno mágico</b>: você escreve numa folha e, no mesmo
        instante, a mesma folha aparece igualzinha em todos os cadernos do prédio. Se um caderno se perde,
        os outros têm tudo.</p>
-    <div class="steps">
+
+    <!-- A "mágica" desenhada: salva em 1 → aparece em todos → 1 quebra → nada se perde -->
+    <div class="demo">
+      <div class="demo-stage">
+        <canvas id="rede" role="img"
+          aria-label="Animação: um documento salvo num computador aparece sozinho em todos os outros do setor; se um quebra, os demais continuam com tudo."></canvas>
+      </div>
+      <div class="demo-cap">
+        <div class="pin" id="capPin">1</div>
+        <p id="capTxt">A funcionária do protocolo <b>salva um ofício</b> no computador dela.
+          <span>Como sempre fez — numa pasta comum.</span></p>
+      </div>
+      <div class="demo-legend">
+        <span><i style="background:#1593d3"></i>Onde foi salvo</span>
+        <span><i style="background:#1f9d57"></i>Já tem a cópia</span>
+        <span><i style="background:#e0533d"></i>Computador que falhou</span>
+      </div>
+    </div>
+
+    <div class="steps" style="margin-top:30px">
       <div class="step"><div class="n">1</div><p>Você <b>salva o arquivo</b> numa pasta, como sempre fez.</p></div>
       <div class="step"><div class="n">2</div><p>Ele <b>aparece sozinho</b> em todos os outros computadores do setor.</p></div>
       <div class="step"><div class="n">3</div><p>Agora o documento está <b>guardado em vários lugares ao mesmo tempo</b>.</p></div>
@@ -175,13 +237,13 @@
   </div>
 </section>
 
-<!-- 4. O CENÁRIO -->
+<!-- 4. O CENÁRIO (texto de apoio) -->
 <section>
   <div class="wrap cen">
-    <h2 class="center" style="margin-bottom:18px">Uma prefeitura com 10 computadores</h2>
-    <p class="big">A funcionária do protocolo salva um ofício. Em segundos, os outros 9 computadores já têm o mesmo ofício.</p>
-    <p>Agora esse documento existe em <b>10 lugares ao mesmo tempo</b>. Pode quebrar 1, 2, 5 máquinas —
-       o acervo continua de pé.</p>
+    <h2 class="center" style="margin-bottom:6px">Uma prefeitura com 10 computadores</h2>
+    <p>A funcionária do protocolo salva um ofício. Em segundos, os outros 9 computadores já têm o mesmo
+       ofício. Agora esse documento existe em <b>10 lugares ao mesmo tempo</b> — pode quebrar 1, 2, 5
+       máquinas, o acervo continua de pé.</p>
     <blockquote><b>Quanto mais computadores o seu órgão tem, mais protegidos ficam os seus documentos.</b>
        Cada máquina é mais uma cópia viva, se atualizando sozinha.</blockquote>
   </div>
@@ -204,8 +266,22 @@
   </div>
 </section>
 
-<!-- 6. O UAU + DOWNLOAD -->
-<section id="baixar">
+<!-- 6. PITCH -->
+<section>
+  <div class="wrap">
+    <div class="pitch">
+      <div>
+        <h3>Vai mostrar para a equipe ou para o prefeito?</h3>
+        <p>Use a apresentação completa: o problema, a solução e por que os dados da cidade precisam
+           ficar na cidade — em slides prontos para reunião.</p>
+      </div>
+      <a class="btn btn-ghost" href="pitch.html" target="_blank" rel="noopener">📊 Ver a apresentação</a>
+    </div>
+  </div>
+</section>
+
+<!-- 7. O UAU + DOWNLOAD -->
+<section id="baixar" class="alt">
   <div class="wrap">
     <h2 class="center">Veja com seus próprios olhos</h2>
     <p class="muted center lead-sub"><b>Desligue a internet.</b> Salve um arquivo num computador.
@@ -227,8 +303,8 @@
   </div>
 </section>
 
-<!-- 7. TIRA O MEDO -->
-<section class="alt">
+<!-- 8. TIRA O MEDO -->
+<section>
   <div class="wrap">
     <h2 class="center">Antes de baixar, tirando as dúvidas</h2>
     <div class="faq">
@@ -241,8 +317,8 @@
   </div>
 </section>
 
-<!-- 8. QUEM SOMOS -->
-<section>
+<!-- 9. QUEM SOMOS -->
+<section class="alt">
   <div class="wrap quem">
     <h2 class="center" style="margin-bottom:14px">Feito por quem conhece prefeitura</h2>
     <p>A <b>Softagon Sistemas</b> desenvolve tecnologia para o setor público há <b>24 anos</b>.
@@ -251,7 +327,7 @@
   </div>
 </section>
 
-<!-- 9. CTA FINAL -->
+<!-- 10. CTA FINAL -->
 <section class="final">
   <div class="wrap">
     <h2>Comece hoje. Seu próximo documento já fica seguro.</h2>
@@ -267,6 +343,165 @@
     Softagon SIGAD · Softagon Sistemas (GovTech, 24 anos) · para prefeituras, câmaras e órgãos públicos.
   </div>
 </footer>
+
+<script>
+/* Animação da replicação — canvas 2D puro (leve, roda liso em máquina fraca, sem dependências).
+   História em 4 fases que repetem: (1) salva num PC, (2) aparece em todos, (3) está em todo lugar,
+   (4) um quebra e nada se perde. */
+(function(){
+  const canvas = document.getElementById('rede');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const C = { azul:'#1593d3', verde:'#1f9d57', tinta:'#0f2438', cinza:'#c9d6e2', falha:'#e0533d' };
+  const N = 10, ORIGEM = 0, FALHA = 6;
+  let W = 0, H = 0, nodes = [], t0 = null, rodando = false, raf = 0;
+
+  function resize(){
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const r = canvas.getBoundingClientRect();
+    W = r.width; H = r.height;
+    canvas.width = Math.round(W*dpr); canvas.height = Math.round(H*dpr);
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    const cx = W/2, cy = H/2, raio = Math.min(W,H)*0.37;
+    nodes = [];
+    for (let i=0;i<N;i++){
+      const a = -Math.PI/2 + i*(2*Math.PI/N);
+      nodes.push({ x: cx + raio*Math.cos(a), y: cy + raio*Math.sin(a) });
+    }
+  }
+
+  function rrect(x,y,w,h,r){
+    ctx.beginPath();
+    ctx.moveTo(x+r,y); ctx.arcTo(x+w,y,x+w,y+h,r); ctx.arcTo(x+w,y+h,x,y+h,r);
+    ctx.arcTo(x,y+h,x,y,r); ctx.arcTo(x,y,x+w,y,r); ctx.closePath();
+  }
+
+  function pc(n, opt){
+    const s = Math.max(34, Math.min(W,H)*0.15);
+    const w = s, h = s*0.7, x = n.x - w/2, y = n.y - h/2;
+    ctx.save();
+    ctx.globalAlpha = opt.falhou ? 0.45 : 1;
+    if (opt.ativo){ // brilho verde de "já tem a cópia"
+      ctx.shadowColor = 'rgba(31,157,87,.55)'; ctx.shadowBlur = 16;
+    }
+    const cor = opt.falhou ? C.falha : opt.origem ? C.azul : opt.ativo ? C.verde : C.cinza;
+    ctx.fillStyle = '#fff'; ctx.strokeStyle = cor; ctx.lineWidth = (opt.ativo||opt.origem) ? 2.6 : 1.6;
+    rrect(x,y,w,h,7); ctx.fill(); ctx.stroke();
+    ctx.shadowBlur = 0;
+    // base do monitor
+    ctx.beginPath(); ctx.moveTo(n.x-w*0.18, y+h+5); ctx.lineTo(n.x+w*0.18, y+h+5);
+    ctx.lineWidth = 3; ctx.strokeStyle = cor; ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(n.x, y+h); ctx.lineTo(n.x, y+h+5); ctx.stroke();
+    // conteúdo da tela
+    if (opt.falhou){
+      ctx.strokeStyle = C.falha; ctx.lineWidth = 3;
+      const d = s*0.16;
+      ctx.beginPath(); ctx.moveTo(n.x-d,n.y-d*0.7); ctx.lineTo(n.x+d,n.y+d*0.7);
+      ctx.moveTo(n.x+d,n.y-d*0.7); ctx.lineTo(n.x-d,n.y+d*0.7); ctx.stroke();
+    } else if (opt.ativo || opt.origem){
+      // folha de documento
+      const dw = s*0.26, dh = s*0.32, dx = n.x-dw/2, dy = n.y-dh/2;
+      ctx.fillStyle = opt.origem && !opt.ativo ? '#eaf4fb' : '#e9f7ef';
+      ctx.strokeStyle = cor; ctx.lineWidth = 1.4;
+      rrect(dx,dy,dw,dh,3); ctx.fill(); ctx.stroke();
+      ctx.strokeStyle = cor; ctx.lineWidth = 1;
+      for (let k=1;k<=3;k++){ const ly=dy+dh*(k/4); ctx.beginPath(); ctx.moveTo(dx+3,ly); ctx.lineTo(dx+dw-3,ly); ctx.stroke(); }
+    }
+    ctx.restore();
+    // etiqueta da origem
+    if (opt.origem){
+      ctx.fillStyle = C.azul; ctx.font = '600 12px system-ui,sans-serif'; ctx.textAlign = 'center';
+      ctx.fillText('Protocolo', n.x, y - 9);
+    }
+  }
+
+  // tempos (ms) do ciclo
+  const T = { salva:1500, voarIni:1500, voarFim:3700, todos:4400, falha:6400, reset:8600, ciclo:9200 };
+  const capPin = document.getElementById('capPin');
+  const capTxt = document.getElementById('capTxt');
+  const FALAS = [
+    { n:'1', cor:C.azul,  html:'A funcionária do protocolo <b>salva um ofício</b> no computador dela.<span>Como sempre fez — numa pasta comum.</span>' },
+    { n:'2', cor:C.verde, html:'Em segundos, ele <b>aparece sozinho</b> nos outros 9 computadores.<span>Sem e-mail, sem pen drive, sem internet.</span>' },
+    { n:'3', cor:C.verde, html:'Agora o documento está <b>guardado em 10 lugares ao mesmo tempo</b>.<span>Cada máquina é uma cópia viva.</span>' },
+    { n:'4', cor:C.falha, html:'Um computador <b>quebrou</b>? Os outros 9 continuam com tudo.<span>Nada se perde — o trabalho não para.</span>' }
+  ];
+  let faseAtual = -1;
+  function fala(i){
+    if (i===faseAtual) return;
+    faseAtual = i;
+    const f = FALAS[i];
+    capPin.textContent = f.n; capPin.style.background = f.cor; capTxt.innerHTML = f.html;
+  }
+
+  function easeInOut(t){ return t<0.5 ? 2*t*t : 1-Math.pow(-2*t+2,2)/2; }
+
+  function quadro(ts){
+    if (!rodando) return;
+    if (t0==null) t0 = ts;
+    const tc = (ts - t0) % T.ciclo;
+    ctx.clearRect(0,0,W,H);
+
+    // linhas sutis origem→demais
+    ctx.strokeStyle = 'rgba(21,147,211,.10)'; ctx.lineWidth = 1;
+    for (let i=0;i<N;i++){ if (i===ORIGEM) continue;
+      ctx.beginPath(); ctx.moveTo(nodes[ORIGEM].x,nodes[ORIGEM].y); ctx.lineTo(nodes[i].x,nodes[i].y); ctx.stroke(); }
+
+    // estado de cada nó
+    const temCopia = i => {
+      if (i===ORIGEM) return tc > T.salva;
+      const span = T.voarFim - T.voarIni;
+      const chega = T.voarIni + ((i-1)/(N-1))*span*0.7 + span*0.3; // escalonado, todos chegam até voarFim
+      return tc > chega;
+    };
+
+    // documentos voando (origem → nós) durante a fase 2
+    if (tc > T.voarIni && tc < T.todos){
+      for (let i=0;i<N;i++){ if (i===ORIGEM) continue;
+        const span = T.voarFim - T.voarIni;
+        const ini = T.voarIni + ((i-1)/(N-1))*span*0.5;
+        const p = (tc - ini)/ (span*0.5);
+        if (p>0 && p<1){
+          const e = easeInOut(p);
+          const x = nodes[ORIGEM].x + (nodes[i].x-nodes[ORIGEM].x)*e;
+          const y = nodes[ORIGEM].y + (nodes[i].y-nodes[ORIGEM].y)*e;
+          ctx.save(); ctx.shadowColor='rgba(31,157,87,.6)'; ctx.shadowBlur=10;
+          ctx.fillStyle = C.verde; ctx.beginPath(); ctx.arc(x,y,5,0,7); ctx.fill(); ctx.restore();
+        }
+      }
+    }
+
+    // nós
+    for (let i=0;i<N;i++){
+      const falhou = (i===FALHA) && tc > T.falha && tc < T.reset;
+      pc(nodes[i], { origem:i===ORIGEM, ativo:temCopia(i) && !(i===ORIGEM && tc<=T.salva), falhou });
+    }
+
+    // legenda falada
+    fala(tc < T.salva+200 ? 0 : tc < T.todos ? 1 : tc < T.falha ? 2 : 3);
+
+    raf = requestAnimationFrame(quadro);
+  }
+
+  function estatico(){ // prefers-reduced-motion: estado final, todos com a cópia
+    ctx.clearRect(0,0,W,H);
+    for (let i=0;i<N;i++) pc(nodes[i], { origem:i===ORIGEM, ativo:true, falhou:false });
+    fala(2);
+  }
+
+  function start(){ if (rodando) return; rodando = true; t0 = null; raf = requestAnimationFrame(quadro); }
+  function stop(){ rodando = false; cancelAnimationFrame(raf); }
+
+  const semMov = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  resize();
+  if (semMov){ estatico(); }
+  else {
+    // só anima quando visível (poupa CPU em máquina fraca)
+    const io = new IntersectionObserver((es)=>{ es.forEach(e=> e.isIntersecting ? start() : stop()); }, { threshold:.2 });
+    io.observe(canvas);
+  }
+  let rt; window.addEventListener('resize', ()=>{ clearTimeout(rt); rt=setTimeout(()=>{ resize(); if(semMov) estatico(); }, 150); });
+})();
+</script>
 
 </body>
 </html>
