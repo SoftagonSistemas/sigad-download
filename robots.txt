@@ -1,0 +1,45 @@
+# Softagon SIGAD — robots.txt
+# Liberado para buscadores e para assistentes de IA (GEO/AEO): queremos ser
+# encontrados, lidos e CITADOS pelas IAs. Nada aqui é privado.
+
+User-agent: *
+Allow: /
+
+# Assistentes de IA / motores generativos (explicitamente liberados)
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+Sitemap: https://softagonsistemas.github.io/sigad-download/sitemap.xml
