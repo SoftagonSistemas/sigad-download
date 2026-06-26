@@ -192,6 +192,8 @@
   .pitch h3{font-size:clamp(19px,2.6vw,23px);font-weight:800}
   .pitch p{color:#dbeefb;font-size:15px;margin-top:6px;max-width:46ch}
   .pitch .btn{flex:none}
+  .pitch-btns{display:flex;flex-direction:column;gap:10px;flex:none}
+  @media(max-width:680px){.pitch-btns{width:100%}}
 
   /* Download */
   .cards{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:28px}
@@ -505,11 +507,14 @@
   <div class="wrap">
     <div class="pitch">
       <div>
-        <h3>Vai mostrar para a equipe ou para o prefeito?</h3>
-        <p>Use a apresentação completa: o problema, a solução e por que os dados da cidade precisam
-           ficar na cidade — em slides prontos para reunião.</p>
+        <h3>Vai mostrar para a equipe, o prefeito ou o TI?</h3>
+        <p>A <b>apresentação</b> para o gestor; o <b>artigo técnico</b> para a área de TI — a arquitetura,
+           as tecnologias e por que os dados da cidade ficam na cidade.</p>
       </div>
-      <a class="btn btn-ghost" href="pitch.html" target="_blank" rel="noopener">📊 Ver a apresentação</a>
+      <div class="pitch-btns">
+        <a class="btn btn-ghost" href="pitch.html" target="_blank" rel="noopener">📊 Ver a apresentação</a>
+        <a class="btn btn-ghost" href="artigo-tecnico-sigad.pdf" target="_blank" rel="noopener">📄 Artigo técnico (para o TI)</a>
+      </div>
     </div>
   </div>
 </section>

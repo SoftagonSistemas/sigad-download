@@ -26,6 +26,7 @@ Prefeituras, câmaras municipais, autarquias, ONGs e demais órgãos públicos b
 ## Páginas
 - [Página de download](https://softagonsistemas.github.io/sigad-download/): baixar grátis para Windows e Ubuntu, como funciona, recursos ilustrados e perguntas frequentes.
 - [Apresentação (pitch)](https://softagonsistemas.github.io/sigad-download/pitch.html): o problema, a solução e a soberania dos dados, em slides.
+- [Artigo técnico (PDF)](https://softagonsistemas.github.io/sigad-download/artigo-tecnico-sigad.pdf): "Nuvem privada de baixo custo para a gestão arquivística municipal" (autor: Hermes Alves Dias Souza) — arquitetura distribuída offline-first/P2P, pilha tecnológica, modelos de durabilidade e TCO, e a tese da nuvem privada municipal (privada, barata, inovadora), no rigor de uma dissertação.
 
 ## Download
 - Windows 11 (64-bit): https://github.com/SoftagonSistemas/sigad-download/releases/latest/download/softagon-sigad-x64-setup.exe
