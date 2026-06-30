@@ -70,7 +70,9 @@
   /* quebras de página */
   h2{ break-after:avoid } table,.fig,caption{ break-inside:avoid }
   .pb{ break-before:page }
-  @page{ size:A4; margin:0 }
+  /* SEM @page margin: as margens (e o espaço do rodapé) são definidas pela API de impressão
+     (Page.printToPDF marginTop/Bottom/Left/Right). Um `@page{margin:0}` aqui forçaria as
+     margens do printToPDF a zero — foi o que tirou as margens e fez o rodapé colar no texto. */
 </style>
 </head>
 <body>
