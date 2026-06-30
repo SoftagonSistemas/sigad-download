@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Nuvem privada de baixo custo para a gestão arquivística municipal — Artigo técnico · Softagon SIGAD</title>
+<meta name="description" content="Artigo técnico: arquitetura distribuída, offline-first e peer-to-peer para um SIGAD municipal de baixo custo. Softagon SIGAD.">
+<style>
+  :root{
+    --ink:#16202b; --mut:#566370; --line:#d7dee5; --soft:#f1f5f8;
+    --blue:#0a86b4; --blue-d:#075f80; --orange:#e25a22;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-print-color-adjust:exact; print-color-adjust:exact}
+  body{
+    margin:0; color:var(--ink);
+    font-family:"DejaVu Serif",Georgia,"Times New Roman",serif;
+    font-size:10.4pt; line-height:1.5; text-align:justify; hyphens:auto;
+  }
+  .page{ width:210mm; min-height:297mm; padding:22mm 20mm 18mm; margin:0 auto; background:#fff; }
+  h1,h2,h3,.brand,.kicker,.meta,.tbl,.fig,.note,.refs h2,.cap,th,.badge{
+    font-family:"DejaVu Sans","Liberation Sans",Arial,system-ui,sans-serif;
+  }
+  /* Cabeçalho do artigo */
+  .kicker{ font-size:8pt; letter-spacing:.14em; text-transform:uppercase; color:var(--blue-d); font-weight:700; margin:0 0 10px }
+  h1{ font-size:21pt; line-height:1.16; margin:0 0 6px; color:#0c1722; letter-spacing:-.01em; text-align:left }
+  .sub-en{ font-size:11pt; color:var(--mut); font-style:italic; font-family:"DejaVu Serif",Georgia,serif; margin:0 0 18px; text-align:left }
+  .author{ font-size:9.2pt; line-height:1.45; color:var(--ink); margin:0 0 4px; text-align:left }
+  .author b{ color:#0c1722 }
+  .meta{ font-size:8.4pt; color:var(--mut); margin:2px 0 0 }
+  .rule{ height:3px; background:linear-gradient(90deg,var(--blue) 0%, var(--orange) 100%); border:0; margin:16px 0 18px; border-radius:2px }
+  /* Resumo */
+  .abs{ background:var(--soft); border-left:3px solid var(--blue); padding:12px 16px; border-radius:0 6px 6px 0; margin:0 0 8px; font-size:9.4pt; line-height:1.5 }
+  .abs p{ margin:0 0 7px } .abs p:last-child{ margin:0 }
+  .abs .lbl{ font-family:"DejaVu Sans",Arial,sans-serif; font-weight:700; font-size:8.4pt; letter-spacing:.06em; color:var(--blue-d) }
+  .kw{ font-size:8.8pt; color:var(--mut); margin:8px 0 0 } .kw b{ color:var(--ink) }
+  /* Seções */
+  h2{ font-size:12.5pt; color:#0c1722; margin:20px 0 7px; padding-bottom:3px; border-bottom:1px solid var(--line); text-align:left }
+  h2 .n{ color:var(--orange); margin-right:8px }
+  h3{ font-size:10.6pt; color:var(--blue-d); margin:13px 0 4px; text-align:left }
+  p{ margin:0 0 8px } .lead-in{ font-weight:700; color:#0c1722; font-family:"DejaVu Sans",Arial,sans-serif; font-size:9.6pt }
+  ul,ol{ margin:0 0 8px; padding-left:18px } li{ margin:0 0 4px }
+  /* Figura de camadas */
+  .fig{ margin:12px 0; border:1px solid var(--line); border-radius:8px; overflow:hidden; font-size:8.8pt }
+  .fig .ttl{ background:#0c1722; color:#fff; padding:8px 12px; font-weight:700; font-size:8.6pt; letter-spacing:.02em }
+  .fig .body{ padding:12px 14px; background:#fbfdfe }
+  .layer{ border:1px solid var(--line); border-radius:6px; padding:8px 11px; margin:0 0 8px; background:#fff }
+  .layer.core{ border-color:var(--blue); background:#f3fafd }
+  .layer .h{ font-family:"DejaVu Sans",Arial,sans-serif; font-weight:700; color:#0c1722; font-size:9pt; margin:0 0 2px }
+  .layer .d{ color:var(--mut); font-size:8.4pt }
+  .cols3{ display:flex; gap:8px } .cols3>div{ flex:1 }
+  .arrow{ text-align:center; color:var(--blue-d); font-size:8pt; margin:-3px 0 5px; font-family:"DejaVu Sans",Arial,sans-serif }
+  .cap{ font-size:7.8pt; color:var(--mut); margin:5px 2px 0; line-height:1.4 }
+  /* Tabelas */
+  table{ width:100%; border-collapse:collapse; margin:8px 0 4px; font-size:8.5pt }
+  caption{ caption-side:top; text-align:left; font-family:"DejaVu Sans",Arial,sans-serif; font-weight:700; font-size:8.8pt; color:#0c1722; margin:10px 0 5px }
+  th{ background:#0c1722; color:#fff; text-align:left; padding:6px 8px; font-size:8pt; font-weight:700; vertical-align:top }
+  td{ border-bottom:1px solid var(--line); padding:5px 8px; vertical-align:top; line-height:1.4 }
+  tr:nth-child(even) td{ background:#f7fafc }
+  .ok{ color:#138a4e; font-weight:700 } .part{ color:#b9791b; font-weight:700 }
+  .mono{ font-family:"DejaVu Sans Mono",monospace; font-size:8pt }
+  /* Referências */
+  .refs h2{ border-bottom:1px solid var(--line) }
+  .refs ol{ padding-left:16px; font-size:8.4pt; line-height:1.45 } .refs li{ margin:0 0 5px }
+  .avail{ background:var(--soft); border-radius:6px; padding:10px 14px; font-size:9pt; margin:12px 0 0 }
+  .avail a{ color:var(--blue-d); text-decoration:none; font-weight:700 }
+  /* quebras de página */
+  h2{ break-after:avoid } table,.fig,caption{ break-inside:avoid }
+  .pb{ break-before:page }
+  @page{ size:A4; margin:0 }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <p class="kicker">Artigo técnico — Gestão arquivística e sistemas distribuídos</p>
+  <h1>Nuvem privada de baixo custo para a gestão arquivística municipal: uma arquitetura distribuída, offline-first e peer-to-peer para SIGAD</h1>
+  <p class="sub-en">Low-cost private cloud for municipal records management: a distributed, offline-first, peer-to-peer SIGAD architecture</p>
+
+  <p class="author"><b>Hermes Alves Dias Souza</b><br>
+  Pós-graduando em IA e Negócios (PUC-Rio) · Fundador e CEO, Softagon Sistemas — Araripina, Pernambuco, Brasil<br>
+  hermes@softagon.com.br · linkedin.com/in/hermesalvesbr</p>
+  <p class="meta">Araripina, junho de 2026 · v2.1</p>
+
+  <hr class="rule">
+
+  <div class="abs">
+    <p><span class="lbl">RESUMO —</span> A gestão de documentos em prefeituras e câmaras municipais brasileiras é, na prática, exercida sobre pastas de sistema de arquivos compartilhadas — arranjo frágil, não rastreável e em desacordo com a legislação arquivística (Lei nº 8.159/1991; e-ARQ Brasil). As alternativas correntes (servidores de arquivo locais ou nuvem pública) esbarram, respectivamente, em custo de infraestrutura e dependência de TI, e em perda de soberania, aprisionamento de fornecedor e exposição sob a LGPD. Sob o paradigma <i>Design Science Research</i>, este trabalho propõe e avalia um Sistema Informatizado de Gestão Arquivística de Documentos (SIGAD) offline-first, distribuído e peer-to-peer (P2P) na rede local, que funciona como uma nuvem privada de baixo custo. Cada estação mantém uma réplica íntegra; a propagação é em tempo quase real e independe de internet ou servidor central. A avaliação combina modelagem analítica de custo total de propriedade e de durabilidade, mapeamento de cobertura de requisitos arquivísticos e validação funcional <i>proof-of-concept</i>. Os modelos indicam custo marginal de software próximo de zero, durabilidade intra-prédio crescente com o número de réplicas e cobertura dos requisitos nucleares do e-ARQ. A contribuição é a articulação dessas propriedades numa categoria de produto — a nuvem privada municipal — adequada à realidade de hardware modesto, orçamento restrito e conectividade intermitente do setor público local.</p>
+    <p class="kw"><b>Palavras-chave:</b> gestão arquivística; SIGAD; nuvem privada; offline-first; peer-to-peer; soberania de dados; e-ARQ Brasil; computação na borda.</p>
+  </div>
+  <div class="abs">
+    <p><span class="lbl">ABSTRACT —</span> Document management in Brazilian municipalities is, in practice, performed over shared file-system folders — a fragile, non-auditable arrangement at odds with archival law. Current alternatives (local file servers or public cloud) face, respectively, infrastructure cost and IT dependency, and loss of data sovereignty, vendor lock-in and privacy exposure. Under a <i>Design Science Research</i> approach, we propose and evaluate an offline-first, distributed, peer-to-peer records-management system (SIGAD) that behaves as a low-cost, sovereign private cloud on the local network. Each workstation holds a full replica; propagation is near real-time and needs neither the internet nor a central server. Results from analytical TCO and durability models, archival-compliance mapping and a functional proof-of-concept indicate near-zero marginal software cost, in-building durability increasing with replica count, and coverage of core e-ARQ requirements.</p>
+    <p class="kw"><b>Keywords:</b> records management; private cloud; offline-first; peer-to-peer; data sovereignty; edge computing.</p>
+  </div>
+
+  <h2><span class="n">1</span>Introdução e problema de pesquisa</h2>
+  <p>O documento é o ativo informacional central de um órgão público: instrui processos, comprova atos e preserva a memória administrativa. No nível municipal, contudo, sua guarda costuma ocorrer em pastas compartilhadas do sistema operacional — o clássico "documento que está no computador da Maria". Esse arranjo concentra o acervo em uma única máquina, não registra autoria nem alterações, não oferece busca eficaz e desaparece quando o equipamento falha. Além de operacionalmente frágil, é juridicamente problemático: a Lei nº 8.159/1991 erige a gestão documental a dever do Poder Público (art. 1º) e prevê responsabilização por destruição de documentos de valor permanente (art. 25) (BRASIL, 1991); o modelo e-ARQ Brasil, adotado pela Resolução CONARQ nº 25/2007, define os requisitos de um SIGAD (CONARQ, 2011).</p>
+  <p>As duas saídas usuais são insatisfatórias para a realidade municipal. Um servidor de arquivos local adiciona custo de hardware, licenciamento e administração, e reintroduz um ponto único de falha. A nuvem pública (suítes de produtividade e drives comerciais) transfere a guarda dos dados da cidade para infraestrutura de terceiros — frequentemente sob jurisdição estrangeira —, criando dependência de conectividade, aprisionamento de fornecedor e exposição de dados pessoais sob a LGPD (BRASIL, 2018). Em ambos os casos, o parque computacional típico (estações modestas, conectividade intermitente, equipe de TI reduzida ou inexistente) é ignorado pelo desenho da solução.</p>
+  <p><span class="lead-in">Pergunta de pesquisa.</span> É possível conceber um SIGAD que, sem servidor central nem dependência de nuvem de terceiros, opere como uma "nuvem privada" — soberana, resiliente e de baixo custo — sobre o parque computacional já existente em uma prefeitura ou câmara, atendendo aos requisitos arquivísticos do e-ARQ Brasil?</p>
+
+  <h2><span class="n">2</span>Objetivos</h2>
+  <p><span class="lead-in">Objetivo geral.</span> Conceber e avaliar uma arquitetura de SIGAD offline-first, distribuída e P2P que realize, na rede local de um órgão público municipal, as propriedades de uma nuvem privada de baixo custo.</p>
+  <p><span class="lead-in">Objetivos específicos (mensuráveis):</span></p>
+  <ul>
+    <li><b>O1.</b> Caracterizar a arquitetura e a pilha tecnológica, justificando cada escolha frente às restrições do alvo.</li>
+    <li><b>O2.</b> Modelar a durabilidade/disponibilidade do acervo em função do número de réplicas (nós).</li>
+    <li><b>O3.</b> Modelar o custo total de propriedade (TCO) em horizonte de cinco anos, comparando com servidor de arquivos e nuvem pública.</li>
+    <li><b>O4.</b> Mapear a cobertura dos requisitos nucleares do e-ARQ Brasil pela arquitetura proposta.</li>
+    <li><b>O5.</b> Validar funcionalmente a propriedade central (replicação em tempo quase real, sem internet) por <i>proof-of-concept</i>.</li>
+  </ul>
+
+  <h2><span class="n">3</span>Revisão da literatura e estado da arte</h2>
+  <p><span class="lead-in">GED versus SIGAD.</span> Um Gerenciador Eletrônico de Documentos (GED) armazena e recupera arquivos; um SIGAD os trata como registros arquivísticos ao longo do ciclo de vida — classificação, temporalidade, destinação, autenticidade e cadeia de custódia (CONARQ, 2011). A distinção é normativa no Brasil e delimita o escopo deste trabalho.</p>
+  <p><span class="lead-in">Sistemas de gestão documental.</span> Plataformas consolidadas (p. ex. Alfresco, Nuxeo) são robustas, porém servidor-cêntricas, demandando infraestrutura, banco relacional dedicado e administração contínua — inadequadas a um setor com TI escassa e hardware modesto.</p>
+  <p><span class="lead-in">Nuvem pública para documentos.</span> Suítes comerciais oferecem sincronização e busca, mas implicam custo recorrente por usuário, dependência de internet e, sobretudo, transferência da guarda dos dados para terceiros, o que conflita com soberania e com a minimização de risco exigida pela LGPD (BRASIL, 2018).</p>
+  <p><span class="lead-in">Sincronização P2P e edge.</span> Ferramentas de sincronização P2P (notadamente o Syncthing) entregam replicação contínua, em tempo real, criptografada em trânsito e sem servidor, alinhadas ao conceito de <i>private cloud</i> da taxonomia NIST SP 800-145 (MELL; GRANCE, 2011) e à computação na borda. Não são, contudo, sistemas arquivísticos: não há protocolo, tramitação, RBAC, classificação, OCR, assinatura ou trilha de auditoria.</p>
+  <p><span class="lead-in">Lacuna (gap).</span> A literatura e o mercado oferecem, de um lado, SIGAD servidor-cêntricos e nuvens públicas e, de outro, sincronizadores P2P genéricos. Inexiste um SIGAD que combine (i) replicação P2P offline-first, (ii) conformidade arquivística e-ARQ, (iii) execução em hardware modesto e (iv) posicionamento explícito como nuvem privada municipal. É essa a contribuição original aqui investigada.</p>
+
+  <div class="fig">
+    <div class="ttl">Figura 1 — Visão de camadas da arquitetura proposta</div>
+    <div class="body">
+      <div class="layer">
+        <div class="h">Aplicativo desktop (Tauri v2 + Nuxt) — multiplataforma (Windows 11 · Ubuntu)</div>
+        <div class="d">Interface Nuxt/Vue na WebView nativa do sistema; sem lógica pesada.</div>
+      </div>
+      <div class="arrow">▼ comandos Tauri</div>
+      <div class="layer core">
+        <div class="h">Núcleo em Rust — o "maestro"</div>
+        <div class="d">Dirige o Syncthing (API REST + eventos) · pipeline de ingestão (PDFium: render/raster/extração + OCR Tesseract → índice Tantivy) · hash SHA-256 · cifra AES-256-GCM com DEK por arquivo (envelope por-usuário) · RBAC local · dono do SQLite · fila de sincronização.</div>
+      </div>
+      <div class="arrow">▼ processos auxiliares (sidecars) · P2P na LAN ▼</div>
+      <div class="cols3">
+        <div class="layer"><div class="h">Syncthing</div><div class="d">Réplica P2P na LAN, offline, cifrada em trânsito. Move os bytes.</div></div>
+        <div class="layer"><div class="h">SQLite + Tantivy</div><div class="d">Estado transacional + índice de busca full-text (BM25, fuzzy).</div></div>
+        <div class="layer"><div class="h">Directus (nuvem)</div><div class="d">Só auth / RBAC / metadados de identidade. Nunca o conteúdo.</div></div>
+      </div>
+    </div>
+  </div>
+  <p class="cap"><b>Fonte:</b> elaboração do autor (2026). O conteúdo dos documentos nunca transita pela nuvem; o Directus porta apenas identidade e permissões, com cache local e operação offline. A integridade é um hash SHA-256 calculado localmente. O PDFium (motor de PDF do Chromium) faz render, rasterização para OCR e extração de texto; o Tesseract reconhece os escaneados.</p>
+
+  <h2><span class="n">4</span>Hipóteses</h2>
+  <ul>
+    <li><b>H1 (replicação).</b> Uma arquitetura P2P offline-first replica um documento por todos os N nós da LAN em tempo quase real, sem servidor central e sem acesso à internet.</li>
+    <li><b>H2 (frugalidade).</b> O consumo de recursos é compatível com o piso de hardware-alvo (CPU classe Celeron, 4 GB de RAM), graças a ingestão single-thread e estritamente serializada (um documento por vez).</li>
+    <li><b>H3 (custo).</b> O TCO em cinco anos é substancialmente inferior ao de um servidor de arquivos e ao de uma nuvem pública por assinatura, por dispensar servidor, licença por usuário e hardware adicional.</li>
+    <li><b>H4 (conformidade).</b> A arquitetura cobre os requisitos nucleares do e-ARQ Brasil: autenticidade/integridade, trilha de auditoria, classificação e temporalidade.</li>
+  </ul>
+
+  <h2><span class="n">5</span>Metodologia</h2>
+  <p><span class="lead-in">Tipo de pesquisa.</span> Aplicada, sob o paradigma <i>Design Science Research</i> (DSR): constrói-se um artefato (a arquitetura/implementação) e avalia-se seu desempenho frente a objetivos declarados (HEVNER et al., 2004). A avaliação combina modelagem analítica (durabilidade e TCO), mapeamento normativo (e-ARQ) e validação funcional (<i>proof-of-concept</i>), evitando extrapolar para métricas empíricas não medidas.</p>
+
+  <h3>5.1 Materiais: o artefato e sua pilha tecnológica</h3>
+  <p>O artefato é um aplicativo desktop multiplataforma (Windows 11 e Ubuntu) cuja lógica pesada reside num núcleo em Rust — linguagem de segurança de memória sem coletor de lixo, adequada a baixo consumo. A interface (Nuxt/Vue) vive apenas na WebView, sem lógica pesada. A Tabela 1 sintetiza a pilha e a justificativa de cada escolha frente às restrições do alvo.</p>
+
+  <table>
+    <caption>Tabela 1 — Pilha tecnológica e justificativa de projeto.</caption>
+    <thead><tr><th style="width:22%">Função</th><th style="width:33%">Tecnologia</th><th style="width:45%">Justificativa frente ao alvo</th></tr></thead>
+    <tbody>
+      <tr><td>Casca desktop</td><td>Tauri v2 (Rust + WebView nativa)</td><td>Binário leve; usa a WebView do SO (sem empacotar navegador).</td></tr>
+      <tr><td>Replicação P2P</td><td>Syncthing (processo auxiliar; API REST + eventos)</td><td>Sincronização contínua, em tempo real, cifrada em trânsito, sem servidor.</td></tr>
+      <tr><td>Estado/transação</td><td>SQLite (embarcado)</td><td>Banco em arquivo, zero administração; fonte da verdade de metadados/RBAC.</td></tr>
+      <tr><td>Busca</td><td>Tantivy (Rust, embarcado)</td><td>Full-text BM25, tolerante a erro (Levenshtein) e a acento; índice em disco.</td></tr>
+      <tr><td>PDF (render, rasterização e extração de texto)</td><td>PDFium (lib nativa; motor do Chromium) — <span class="mono">pdf_oxide</span> (Rust puro) como alternativa de extração</td><td>Único motor para o visualizador inline (página a página, sob demanda), a rasterização para OCR e a extração da camada de texto. Substituiu o poppler (−1 dependência nativa).</td></tr>
+      <tr><td>OCR</td><td>Tesseract (idioma <span class="mono">por</span>, processo auxiliar) — PaddleOCR (ONNX) em estudo</td><td>CPU-only; serializado (um documento por vez) e descarregado em ociosidade. As páginas são rasterizadas pelo PDFium.</td></tr>
+      <tr><td>Integridade</td><td>SHA-256 (FIPS 180-4)</td><td>Selo de inviolabilidade por documento (NIST, 2015).</td></tr>
+      <tr><td>Sigilo / confidencialidade</td><td>AES-256-GCM + DEK por arquivo, embrulhada pela chave do <b>usuário</b> (HKDF)</td><td><i>Envelope encryption</i> por-usuário ("Privado só eu"): cifrado antes de entrar na pasta; nem o administrador nem o colega da secretaria abrem (NIST, 2001).</td></tr>
+      <tr><td>Assinatura</td><td>ICP-Brasil A1 / gov.br (CAdES <span class="mono">.p7s</span>)</td><td>Validade jurídica; assinatura em bloco e carimbo de data/hora (ITI, 2020).</td></tr>
+      <tr><td>Identidade/RBAC</td><td>Directus (nuvem) com cache local</td><td>Só metadados de identidade/permissão — nunca o conteúdo; opera offline pela fila.</td></tr>
+      <tr><td>Descoberta de pares</td><td>mDNS + varredura unicast do /24 (Rust)</td><td>Pareamento automático e 100% offline, por instituição; auto-cura de endereço por ciclo.</td></tr>
+      <tr><td>Distribuição / atualização</td><td>Instaladores assinados + atualizador silencioso (Tauri updater)</td><td>NSIS (Windows 11), <span class="mono">.deb</span> e AppImage (Ubuntu); atualização assinada, aplicada no reinício, sem ação do usuário.</td></tr>
+    </tbody>
+  </table>
+  <p class="cap"><b>Fonte:</b> elaboração do autor (2026).</p>
+
+  <h3>5.2 Procedimentos: replicação e ingestão</h3>
+  <p>O núcleo sobe o Syncthing como processo auxiliar headless e o dirige pela API REST; reage a chegadas de arquivo pela API de eventos. Uma pasta compartilhada por secretaria mapeia a separação organizacional; o compartilhamento é restrito aos <i>device IDs</i> do órgão (isolamento entre instituições). Quando um arquivo entra — salvo pelo usuário na "pasta mágica" ou chegando de um par — dispara-se um pipeline de ingestão estritamente serializado: (1) cálculo do hash SHA-256; (2) extração da camada de texto com o PDFium (<span class="mono">pdf_oxide</span> como alternativa); (3) se vier vazia, rasterização de cada página pelo PDFium e OCR com o Tesseract; (4) gravação do texto e indexação em Tantivy; (5) registro em SQLite e enfileiramento do metadado de uso. Documentos marcados como privados são cifrados <i>antes</i> de entrar na pasta (a DEK do arquivo é embrulhada pela chave do usuário e viaja num <i>sidecar</i> replicável de controle de acesso), de modo que a confidencialidade não dependa de esconder na lista, mas da própria cifra. A descoberta de pares é offline (mDNS mais varredura unicast na porta de identidade), com auto-cura de endereço a cada ciclo: se um nó troca de rede/IP, o endereço é reconciliado e a conexão se restabelece sozinha.</p>
+
+  <h3>5.3 Métodos de análise</h3>
+  <p><span class="lead-in">Durabilidade (O2).</span> Modela-se a probabilidade de perda total do acervo como função do número de réplicas independentes. Seja <i>p</i> a probabilidade anual de perda de uma estação; com N réplicas independentes dentro do prédio, a perda total exige a falha simultânea de todas: P(perda) = p<sup>N</sup>.</p>
+  <p><span class="lead-in">TCO (O3).</span> Modelo de cinco anos para uma secretaria de dez estações, comparando três estratégias, com as premissas declaradas na Tabela 3 (valores ilustrativos, em reais, para a ordem de grandeza — não cotação).</p>
+  <p><span class="lead-in">Conformidade (O4).</span> Mapeamento direto entre requisitos nucleares do e-ARQ e mecanismos da arquitetura (Tabela 4).</p>
+  <p><span class="lead-in">Validação funcional (O5).</span> Teste de aceitação de dois nós: com a internet desligada, salvar um arquivo na pasta mágica de um nó e verificar sua aparição, em tempo quase real, no segundo nó, e sua recuperação por busca.</p>
+
+  <h2><span class="n">6</span>Resultados</h2>
+  <h3>6.1 As três nuvens (síntese da contribuição)</h3>
+  <div class="cols3" style="gap:10px; margin:8px 0 4px">
+    <div class="layer" style="background:#f3fafd;border-color:var(--blue)"><div class="h">Nuvem privada</div><div class="d">Os documentos residem nas estações do próprio órgão. Não há trânsito de conteúdo para terceiros; soberania e LGPD por desenho — conforme a noção de <i>private cloud</i> (MELL; GRANCE, 2011).</div></div>
+    <div class="layer"><div class="h">Nuvem barata</div><div class="d">Sem servidor, sem licença por usuário, sem hardware novo: roda sobre o parque existente. Custo marginal de software próximo de R$ 0 (Tabela 3).</div></div>
+    <div class="layer" style="background:#fff6f1;border-color:var(--orange)"><div class="h">Nuvem inovadora</div><div class="d">Offline-first, P2P e <i>serverless</i> na borda, com descoberta e auto-cura sem nuvem — propriedade ausente nos SIGAD servidor-cêntricos.</div></div>
+  </div>
+
+  <h3>6.2 Durabilidade em função das réplicas (O2)</h3>
+  <table>
+    <caption>Tabela 2 — Probabilidade anual de perda total dentro do prédio sob falhas independentes.</caption>
+    <thead><tr><th>Réplicas (N)</th><th>P(perda) com p = 5%/ano</th><th>Ordem de grandeza</th></tr></thead>
+    <tbody>
+      <tr><td>1 (pasta do Windows)</td><td>5 × 10<sup>−2</sup></td><td>1 em 20 por ano</td></tr>
+      <tr><td>3</td><td>1,3 × 10<sup>−4</sup></td><td>1 em 8.000</td></tr>
+      <tr><td>5</td><td>3,1 × 10<sup>−7</sup></td><td>1 em 3 milhões</td></tr>
+      <tr><td>10</td><td>9,8 × 10<sup>−14</sup></td><td>praticamente desprezível</td></tr>
+    </tbody>
+  </table>
+  <p class="cap"><b>Fonte:</b> elaboração do autor (2026), a partir de P = p<sup>N</sup>. Premissa: independência das falhas — válida para defeitos de hardware/erro humano, não para sinistros correlacionados (incêndio, furto do parque), tratados na Seção 7.</p>
+
+  <h3>6.3 Custo total de propriedade em cinco anos (O3)</h3>
+  <table>
+    <caption>Tabela 3 — Modelo de TCO (ilustrativo, ordem de grandeza) para 10 estações em 60 meses.</caption>
+    <thead><tr><th style="width:34%">Item</th><th>Servidor de arquivos</th><th>Nuvem pública</th><th>SIGAD (grátis)</th></tr></thead>
+    <tbody>
+      <tr><td>Hardware/servidor</td><td>~R$ 8.000</td><td>R$ 0</td><td>R$ 0 (usa o parque)</td></tr>
+      <tr><td>Licença/assinatura</td><td>~R$ 5.000</td><td>~R$ 18.000 (R$ 30/usuário·mês)</td><td>R$ 0</td></tr>
+      <tr><td>Backup/continuidade</td><td>~R$ 3.000</td><td>incluído</td><td>R$ 0 (redundância nativa)</td></tr>
+      <tr><td>Administração de TI</td><td>alta</td><td>média</td><td>baixa</td></tr>
+      <tr><td>Dependência de internet</td><td>não</td><td>total</td><td>não</td></tr>
+      <tr><td><b>TCO de software/infra</b></td><td><b>~R$ 16.000</b></td><td><b>~R$ 18.000</b></td><td><b>≈ R$ 0</b></td></tr>
+    </tbody>
+  </table>
+  <p class="cap"><b>Fonte:</b> elaboração do autor (2026). O backup off-site (cópia fora do prédio) é um serviço opcional do tier pago e não está incluído no tier grátis (ver Seção 7).</p>
+
+  <h3>6.4 Cobertura de conformidade e-ARQ (O4)</h3>
+  <table>
+    <caption>Tabela 4 — Mapeamento requisito nuclear → mecanismo da arquitetura.</caption>
+    <thead><tr><th style="width:46%">Requisito (e-ARQ / Lei 8.159)</th><th>Mecanismo</th><th style="width:12%">Atende</th></tr></thead>
+    <tbody>
+      <tr><td>Autenticidade / integridade</td><td>SHA-256 por documento</td><td class="ok">Sim</td></tr>
+      <tr><td>Trilha de auditoria</td><td>registro de auditoria com selo de hash</td><td class="ok">Sim</td></tr>
+      <tr><td>Captura e protocolo</td><td>número sequencial atômico + comprovante</td><td class="ok">Sim</td></tr>
+      <tr><td>Tramitação / fluxo</td><td>tramitação entre secretarias com prazo</td><td class="ok">Sim</td></tr>
+      <tr><td>Classificação e temporalidade</td><td>plano de classificação + tabela</td><td class="ok">Sim</td></tr>
+      <tr><td>Controle de acesso / sigilo</td><td>RBAC + cifra por-usuário (envelope "Privado só eu")</td><td class="ok">Sim</td></tr>
+      <tr><td>Preservação a longo prazo</td><td>redundância local; off-site (pago)</td><td class="part">Parcial</td></tr>
+    </tbody>
+  </table>
+  <p class="cap"><b>Fonte:</b> elaboração do autor (2026). A preservação de longo prazo é coberta no nível de redundância; a cópia fora do prédio é o limite honesto do tier grátis (Seção 7).</p>
+
+  <h3>6.5 Validação funcional (O5)</h3>
+  <p>Em bancada de dois nós na mesma rede local, com a internet fisicamente desligada, um arquivo salvo na pasta mágica do nó A tornou-se disponível no nó B em tempo quase real e recuperável pela busca full-text, confirmando H1 qualitativamente. O ciclo de descoberta reconcilia endereços a cada passada, restabelecendo a conexão após troca de rede/IP de um par (auto-cura), o que sustenta a robustez do mecanismo P2P em campo. A validação foi reproduzida nas duas plataformas suportadas (Windows 11 e Ubuntu), inclusive na replicação entre nós de sistemas operacionais distintos.</p>
+
+  <h2><span class="n">7</span>Discussão</h2>
+  <p>Os resultados sustentam a tese das três nuvens. A durabilidade (Tabela 2) inverte a intuição: num arranjo distribuído, mais estações significam mais proteção, pois cada uma é uma réplica viva — o oposto da pasta única. O TCO (Tabela 3) evidencia que a frugalidade não é retórica: ao dispensar servidor, licença por usuário e hardware novo, o custo marginal de software tende a zero, o que é decisivo num setor de orçamento restrito e sujeito ao controle do Tribunal de Contas. A conformidade (Tabela 4) diferencia a proposta de um mero sincronizador P2P: é a camada arquivística (protocolo, RBAC, classificação, auditoria, assinatura) sobre o motor de replicação que a qualifica como SIGAD.</p>
+  <p><span class="lead-in">Comparação com o estado da arte.</span> Frente a SIGAD servidor-cêntricos, elimina-se a infraestrutura e o ponto único de falha; frente à nuvem pública, recupera-se a soberania e a operação offline; frente ao Syncthing puro, acrescenta-se toda a camada de gestão arquivística e de segurança (cifra, RBAC, hash, auditoria). É a interseção dessas propriedades que constitui a contribuição.</p>
+  <p><span class="lead-in">Limitações e ameaças à validade.</span> (i) A validação de H1 é funcional/qualitativa; um estudo de campo multimunicípio com medição de latência, consumo e satisfação fortaleceria a evidência. (ii) Os modelos de TCO e durabilidade dependem de premissas declaradas (preços de mercado; independência de falhas) e devem ser lidos como ordem de grandeza, não cotação. (iii) A independência de falhas não vale para sinistros correlacionados (incêndio, enchente, furto de todo o parque): contra esses é necessária uma cópia fora do prédio — deliberadamente um serviço do tier pago (a "âncora na nuvem"), o que delimita com honestidade o alcance do tier grátis. (iv) O produto está em estágio alfa; a maturidade operacional plena é trabalho em curso.</p>
+
+  <h2><span class="n">8</span>Conclusão</h2>
+  <p>Retomando a pergunta de pesquisa: sim — é viável um SIGAD que opere como nuvem privada municipal, soberana, resiliente e de baixo custo, sobre o parque já existente e sem servidor central nem dependência de nuvem de terceiros, cobrindo os requisitos nucleares do e-ARQ. A contribuição é tripla: (a) a arquitetura offline-first com P2P e camada arquivística que preenche a lacuna identificada; (b) a articulação dessa arquitetura na categoria "nuvem privada municipal — privada, barata, inovadora"; e (c) os modelos de durabilidade e TCO que tornam o argumento defensável para o decisor técnico e para o controle externo. Como trabalho futuro: estudo de campo com instrumentação quantitativa; a âncora de backup off-site e o acesso entre redes; e a camada de inteligência artificial (busca semântica/RAG) com trava de sensibilidade, sempre preservando a soberania como princípio de projeto.</p>
+
+  <div class="avail">
+    <b>Disponibilidade.</b> O Softagon SIGAD está disponível gratuitamente, para Windows 11 e Ubuntu, em <a href="https://softagonsistemas.github.io/sigad-download/">softagonsistemas.github.io/sigad-download</a>.
+  </div>
+
+  <div class="refs">
+    <h2><span class="n">9</span>Referências</h2>
+    <ol>
+      <li>BRASIL. <i>Lei nº 8.159, de 8 de janeiro de 1991</i>. Dispõe sobre a política nacional de arquivos públicos e privados. Brasília, 1991.</li>
+      <li>BRASIL. <i>Lei nº 13.709, de 14 de agosto de 2018</i> (Lei Geral de Proteção de Dados Pessoais — LGPD). Brasília, 2018.</li>
+      <li>CONSELHO NACIONAL DE ARQUIVOS (CONARQ). <i>e-ARQ Brasil: Modelo de Requisitos para Sistemas Informatizados de Gestão Arquivística de Documentos</i>. Rio de Janeiro: Arquivo Nacional, 2011.</li>
+      <li>HEVNER, A. R.; MARCH, S. T.; PARK, J.; RAM, S. Design Science in Information Systems Research. <i>MIS Quarterly</i>, v. 28, n. 1, p. 75–105, 2004.</li>
+      <li>MELL, P.; GRANCE, T. <i>The NIST Definition of Cloud Computing</i> (SP 800-145). Gaithersburg: NIST, 2011.</li>
+      <li>NATIONAL INSTITUTE OF STANDARDS AND TECHNOLOGY (NIST). <i>Secure Hash Standard (SHS)</i>, FIPS PUB 180-4. Gaithersburg: NIST, 2015.</li>
+      <li>NATIONAL INSTITUTE OF STANDARDS AND TECHNOLOGY (NIST). <i>Advanced Encryption Standard (AES)</i>, FIPS PUB 197. Gaithersburg: NIST, 2001.</li>
+      <li>INSTITUTO NACIONAL DE TECNOLOGIA DA INFORMAÇÃO (ITI). <i>Padrões da ICP-Brasil — assinaturas digitais (DOC-ICP-15)</i>. Brasília: ITI, 2020.</li>
+    </ol>
+  </div>
+
+</div>
+</body>
+</html>
