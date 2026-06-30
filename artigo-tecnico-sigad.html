@@ -16,7 +16,11 @@
     font-family:"DejaVu Serif",Georgia,"Times New Roman",serif;
     font-size:10.4pt; line-height:1.5; text-align:justify; hyphens:auto;
   }
-  .page{ width:210mm; min-height:297mm; padding:22mm 20mm 18mm; margin:0 auto; background:#fff; }
+  /* Margens reais e o rodapé são aplicados pela API de impressão (Page.printToPDF):
+     paperWidth/Height A4 + marginTop/Bottom/Left/Right + footerTemplate com nº de página.
+     Aqui o container só flui o conteúdo. (No navegador, dá um respiro lateral.) */
+  .page{ max-width:760px; margin:0 auto; padding:24px 0; background:#fff; }
+  @media print{ .page{ max-width:none; padding:0 } }
   h1,h2,h3,.brand,.kicker,.meta,.tbl,.fig,.note,.refs h2,.cap,th,.badge{
     font-family:"DejaVu Sans","Liberation Sans",Arial,system-ui,sans-serif;
   }

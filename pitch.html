@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Softagon SIGAD — Apresentação</title>
-<meta name="description" content="Apresentação do Softagon SIGAD: a nuvem privada da prefeitura. Os documentos da cidade ficam na cidade — offline, distribuído e dentro da lei.">
+<title>Softagon SIGAD — A nuvem privada da sua prefeitura</title>
+<meta name="description" content="Por que a sua prefeitura precisa do Softagon SIGAD: nuvem privada, soberania de dados, pasta mágica, permissões por secretaria e conformidade arquivística. Offline, seguro e dentro da lei.">
 <style>
   :root{
     --dark:#0b0e14; --blue:#00a3d7; --blue-2:#0a86b4; --orange:#fe682d;
@@ -13,65 +13,85 @@
   }
   *{margin:0;padding:0;box-sizing:border-box}
   html,body{height:100%;background:#05070b;font-family:var(--sans);color:var(--ink);overflow:hidden}
-  /* Palco 16:9, escala para caber na tela */
   #stage{position:fixed;inset:0;display:flex;align-items:center;justify-content:center}
   #deck{width:1280px;height:720px;position:relative;transform-origin:center center;box-shadow:0 30px 90px rgba(0,0,0,.55);border-radius:14px;overflow:hidden;background:var(--dark)}
-  .slide{position:absolute;inset:0;display:none;flex-direction:column;justify-content:center;padding:70px 84px;overflow:hidden}
+  .slide{position:absolute;inset:0;display:none;flex-direction:column;justify-content:center;padding:64px 84px;overflow:hidden}
   .slide.on{display:flex;animation:fade .45s ease}
   @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
   .dark{background:
-     radial-gradient(115% 80% at 80% 10%, rgba(0,163,215,.20) 0%, rgba(11,14,20,0) 55%),
-     radial-gradient(95% 75% at 2% 108%, rgba(254,104,45,.16) 0%, rgba(11,14,20,0) 52%), var(--dark);
+     radial-gradient(115% 80% at 82% 8%, rgba(0,163,215,.22) 0%, rgba(11,14,20,0) 56%),
+     radial-gradient(95% 75% at 0% 110%, rgba(254,104,45,.18) 0%, rgba(11,14,20,0) 52%), var(--dark);
      color:#fff}
   .lite{background:var(--light)}
-  .eyebrow{font-size:15px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--blue);margin-bottom:18px}
-  .dark .eyebrow{color:var(--blue)}
-  h1{font-size:96px;line-height:.96;letter-spacing:-.02em;font-weight:900}
-  h2{font-size:52px;line-height:1.04;letter-spacing:-.01em;font-weight:900;color:var(--ink)}
+  .eyebrow{font-size:15px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--blue);margin-bottom:16px}
+  h1{font-size:90px;line-height:.95;letter-spacing:-.02em;font-weight:900}
+  h2{font-size:50px;line-height:1.04;letter-spacing:-.01em;font-weight:900;color:var(--ink)}
   .dark h2{color:#fff}
-  .lead{font-size:26px;line-height:1.4;color:var(--mut);font-weight:500;max-width:980px}
+  .lead{font-size:25px;line-height:1.4;color:var(--mut);font-weight:500;max-width:1000px}
   .dark .lead{color:#c7d0db}
-  .big{font-size:40px;line-height:1.18;font-weight:800;color:#fff;max-width:1000px}
+  .big{font-size:38px;line-height:1.18;font-weight:800;color:#fff;max-width:1020px}
   .accent{color:var(--orange)} .accentb{color:var(--blue)}
-  .grid{display:grid;gap:18px;margin-top:34px}
+  .grid{display:grid;gap:16px;margin-top:30px}
   .g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}
-  .card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:26px 26px}
+  .card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:24px}
   .dark .card{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.12)}
-  .card .ic{font-size:30px;margin-bottom:12px}
-  .card h3{font-size:23px;font-weight:800;margin-bottom:7px;color:var(--ink)}
+  .card .ic{font-size:28px;margin-bottom:10px}
+  .card h3{font-size:22px;font-weight:800;margin-bottom:6px;color:var(--ink)}
   .dark .card h3{color:#fff}
-  .card p{font-size:17px;line-height:1.4;color:var(--mut)} .dark .card p{color:#b9c3cf}
-  .pain li{font-size:30px;line-height:1.5;color:#374151;list-style:none;padding-left:42px;position:relative;margin-bottom:14px}
-  .pain li::before{content:"";position:absolute;left:0;top:12px;width:22px;height:22px;border-radius:6px;background:linear-gradient(135deg,var(--orange),#ff9a6b)}
-  .pain .kick{color:#9aa4b2;font-size:24px}
-  .pcs{display:flex;gap:14px;flex-wrap:wrap;margin:30px 0 22px}
-  .pc{width:96px;height:74px;border-radius:10px;border:2px solid rgba(255,255,255,.22);display:flex;align-items:center;justify-content:center;font-size:30px;background:rgba(255,255,255,.04)}
+  .card p{font-size:16px;line-height:1.4;color:var(--mut)} .dark .card p{color:#b9c3cf}
+  .pain li{font-size:28px;line-height:1.5;color:#374151;list-style:none;padding-left:42px;position:relative;margin-bottom:13px}
+  .pain li::before{content:"";position:absolute;left:0;top:11px;width:22px;height:22px;border-radius:6px;background:linear-gradient(135deg,var(--orange),#ff9a6b)}
+  .pain .kick{color:#8a95a3;font-size:23px;margin-top:6px}
+  .pcs{display:flex;gap:13px;flex-wrap:wrap;margin:26px 0 20px}
+  .pc{width:90px;height:70px;border-radius:10px;border:2px solid rgba(255,255,255,.22);display:flex;align-items:center;justify-content:center;font-size:28px;background:rgba(255,255,255,.04)}
   .pc.src{border-color:var(--orange);background:rgba(254,104,45,.16)}
   .pc.has{border-color:var(--blue);background:rgba(0,163,215,.16)}
-  .chips{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}
-  .chip{font-size:19px;font-weight:700;padding:11px 20px;border-radius:999px;background:#fff;border:1px solid var(--line);color:var(--ink)}
+  .chips{display:flex;gap:11px;flex-wrap:wrap;margin-top:24px}
+  .chip{font-size:18px;font-weight:700;padding:10px 18px;border-radius:999px;background:#fff;border:1px solid var(--line);color:var(--ink)}
   .dark .chip{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.16);color:#eaf2f8}
   .chip .d{color:var(--blue-2)} .dark .chip .d{color:var(--blue)}
-  .pillars{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:36px}
-  .pillar h3{color:#fff;font-size:24px;font-weight:800;margin:14px 0 8px}
-  .pillar p{color:#aeb9c6;font-size:17px;line-height:1.4}
-  .pillar .n{font-size:34px}
-  .law{background:#fff;border-left:6px solid var(--orange);border-radius:0 14px 14px 0;padding:24px 30px;margin-top:30px;font-size:23px;line-height:1.45;color:#374151;max-width:1040px}
+  .law{background:#fff;border-left:6px solid var(--orange);border-radius:0 14px 14px 0;padding:22px 28px;margin-top:26px;font-size:22px;line-height:1.45;color:#374151;max-width:1060px}
   .law b{color:var(--ink)}
-  .biz{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:30px}
-  .biz .col{background:#fff;border:1px solid var(--line);border-radius:16px;padding:28px}
-  .biz .free{border-top:5px solid var(--blue)} .biz .paid{border-top:5px solid var(--orange)}
-  .biz h3{font-size:26px;font-weight:900;margin-bottom:6px}
-  .biz .tag{font-size:15px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--mut);margin-bottom:14px}
-  .biz ul{list-style:none} .biz li{font-size:18px;line-height:1.5;color:#374151;padding-left:26px;position:relative;margin-bottom:7px}
-  .biz li::before{content:"\203A";position:absolute;left:6px;color:var(--blue-2);font-weight:900}
-  .foot{position:absolute;left:84px;bottom:30px;display:flex;align-items:center;gap:12px;font-size:15px;color:var(--mut);font-weight:600}
-  .dark .foot{color:#7d8a99}
-  .foot img{height:22px;opacity:.9}
-  .close{font-size:120px;line-height:.95;font-weight:900;color:#fff;letter-spacing:-.02em}
-  .cta{font-size:30px;color:#c7d0db;margin-top:26px;font-weight:600}
+  .punch{margin-top:24px;font-size:24px;font-weight:800;color:#0c1722}
+  .dark .punch{color:#fff}
+  /* GED vs SIGAD */
+  .vs{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:30px}
+  .vs .col{border-radius:16px;padding:26px 28px}
+  .vs .ged{background:#fff;border:1px dashed #c9d2dc}
+  .vs .sig{background:linear-gradient(180deg,#eaf8fd,#fff);border:2px solid var(--blue);box-shadow:0 12px 30px rgba(0,163,215,.14)}
+  .vs h3{font-size:24px;font-weight:900;margin-bottom:4px}
+  .vs .ged h3{color:#8a95a3} .vs .sig h3{color:var(--blue-2)}
+  .vs .tag{font-size:14px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;margin-bottom:14px;color:#9aa6b3}
+  .vs ul{list-style:none} .vs li{font-size:18px;line-height:1.45;margin-bottom:9px;padding-left:30px;position:relative}
+  .vs .ged li{color:#97a2b0} .vs .ged li::before{content:"\2715";position:absolute;left:4px;color:#c2ccd6;font-weight:900}
+  .vs .sig li{color:#243240} .vs .sig li::before{content:"\2713";position:absolute;left:2px;color:#138a4e;font-weight:900}
+  /* Permissões por secretaria */
+  .secs{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:28px}
+  .sec{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:16px 14px;text-align:center}
+  .sec .nm{font-weight:800;color:#fff;font-size:18px}
+  .sec .ey{color:#9fb2c2;font-size:14px;margin-top:4px}
+  .sec.mine{border-color:var(--blue);background:rgba(0,163,215,.16)}
+  .sec.lock .nm{color:#8794a3}
+  .pillars{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:32px}
+  .pillar h3{color:#fff;font-size:23px;font-weight:800;margin:12px 0 7px}
+  .pillar p{color:#aeb9c6;font-size:16px;line-height:1.4}
+  .pillar .n{font-size:32px}
+  .sov{display:inline-block;margin-top:26px;font-size:25px;font-weight:800;color:#fff;background:linear-gradient(135deg,var(--blue),var(--blue-2));padding:13px 24px;border-radius:14px}
+  .foot{position:absolute;left:84px;bottom:28px;display:flex;align-items:center;gap:11px;font-size:15px;color:var(--mut);font-weight:600}
+  .dark .foot{color:#8493a3}
+  .foot img{height:24px;opacity:.95}
+  .close{font-size:84px;line-height:.98;font-weight:900;color:#fff;letter-spacing:-.02em;max-width:1000px}
+  .cta{font-size:27px;color:#c7d0db;margin-top:22px;font-weight:600;max-width:980px}
   .cta b{color:var(--blue)}
-  .sov{display:inline-block;margin-top:30px;font-size:26px;font-weight:800;color:#fff;background:linear-gradient(135deg,var(--blue),var(--blue-2));padding:14px 26px;border-radius:14px}
+  .contact{display:flex;gap:24px;flex-wrap:wrap;margin-top:22px;font-size:18px;color:#aeb9c6;font-weight:600}
+  .contact b{color:#fff}
+  /* Mascote (dragão) */
+  .mascot{position:absolute;pointer-events:none;filter:drop-shadow(0 18px 40px rgba(0,0,0,.45))}
+  .mascot.capa{right:74px;bottom:0;height:560px}
+  .mascot.fecho{right:80px;bottom:0;height:520px}
+  .brandmark{display:flex;align-items:center;gap:10px;margin-bottom:18px}
+  .brandmark img{height:30px}
+  .brandmark span{font-weight:800;font-size:17px;color:#fff;letter-spacing:.01em}
   /* HUD */
   #hud{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);display:flex;gap:14px;align-items:center;
        background:rgba(10,14,20,.78);color:#cdd6e0;font-family:var(--sans);font-size:13px;font-weight:600;
@@ -81,13 +101,13 @@
   #dots{display:flex;gap:7px}
   .dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.28);cursor:pointer}
   .dot.on{background:var(--blue)}
-  /* Handout "salvar como PDF": cada slide vira uma página 16:9 exata (1:1 com o design) */
   @page{ size:1280px 720px; margin:0 }
   @media print{
     html,body{overflow:visible;background:#fff;height:auto}
     #hud{display:none} #stage{position:static;display:block}
     #deck{transform:none!important;width:1280px;height:auto;box-shadow:none;border-radius:0}
-    .slide{display:flex!important;position:relative;inset:auto;width:1280px;height:720px;break-after:page;overflow:hidden}
+    .slide{display:flex!important;position:relative;inset:auto;width:1280px;height:720px;break-after:page;overflow:hidden;
+           animation:none!important;opacity:1!important;transform:none!important}
   }
 </style>
 </head>
@@ -97,47 +117,44 @@
 
   <!-- 01 Capa -->
   <section class="slide dark on" data-t="Capa">
-    <div class="eyebrow">Softagon SIGAD · Apresentação</div>
-    <h1>A nuvem privada<br>da <span class="accentb">prefeitura</span>.</h1>
-    <p class="lead" style="margin-top:30px">Os documentos da cidade ficam <b style="color:#fff">na cidade</b>. Você salva uma vez e o arquivo aparece — e fica guardado — em todos os computadores do setor. Na hora, <b style="color:#fff">sem internet</b> e sem nuvem de terceiros.</p>
+    <div class="brandmark"><img src="img/symbol.png" alt="Softagon"><span>Softagon SIGAD</span></div>
+    <h1 style="max-width:820px">A nuvem privada<br>da sua <span class="accentb">prefeitura</span>.</h1>
+    <p class="lead" style="margin-top:26px;max-width:760px">Os documentos da cidade — seguros, organizados e em <b style="color:#fff">todos os computadores do órgão</b>, na hora. <b style="color:#fff">Sem internet</b> e sem depender da nuvem de ninguém.</p>
     <div class="sov">Soberania de dados · offline · dentro da lei</div>
+    <img class="mascot capa" src="img/mascot.png" alt="">
     <div class="foot"><img src="img/symbol.png" alt="">Softagon Sistemas · 24 anos com o setor público</div>
   </section>
 
   <!-- 02 A dor -->
   <section class="slide lite" data-t="A dor">
-    <div class="eyebrow" style="color:var(--blue-2)">O problema de hoje</div>
-    <h2>A pasta do Windows nunca foi feita<br>para guardar os documentos de um órgão.</h2>
-    <ul class="pain" style="margin-top:34px">
-      <li>O ofício <b>"está no computador da Maria"</b> — e a Maria saiu de férias.</li>
-      <li>O PC queimou e <b>levou anos de documentos</b> junto. Não havia backup.</li>
-      <li>Mandaram a <b>versão errada</b> por WhatsApp e ninguém sabe qual vale.</li>
-      <li>Ninguém acha o <b>ofício de 2019</b> — e a busca do Windows não ajuda.</li>
+    <div class="eyebrow" style="color:var(--blue-2)">A verdade incômoda</div>
+    <h2>Hoje, a memória da sua prefeitura<br>mora numa pasta solta do Windows.</h2>
+    <ul class="pain" style="margin-top:30px">
+      <li>O documento <b>"está no computador da Maria"</b> — e a Maria saiu.</li>
+      <li>Um HD queima e <b>leva anos de ofícios, contratos e processos</b>. Sem volta.</li>
+      <li>A versão certa? Ninguém sabe — <b>foi por WhatsApp</b>.</li>
+      <li>O ofício de 2019 sumiu e <b>a busca do Windows não acha</b>.</li>
     </ul>
-    <p class="pain kick" style="margin-top:10px">A culpa não é da pessoa. É da ferramenta.</p>
+    <p class="pain kick">Não é descuido da equipe. É a ferramenta errada para um bem público.</p>
     <div class="foot"><img src="img/symbol.png" alt="">Softagon SIGAD</div>
   </section>
 
-  <!-- 03 Resiliência -->
-  <section class="slide dark" data-t="Resiliência">
-    <div class="eyebrow">Redundância vira proteção</div>
-    <h2>A Maria salva em <span class="accent">um</span>.<br>Em segundos, está em <span class="accentb">todos</span>.</h2>
-    <div class="pcs">
-      <div class="pc src">🟧</div>
-      <div class="pc has">💻</div><div class="pc has">💻</div><div class="pc has">💻</div>
-      <div class="pc has">💻</div><div class="pc has">💻</div><div class="pc has">💻</div>
-      <div class="pc has">💻</div><div class="pc has">💻</div><div class="pc has">💻</div>
+  <!-- 03 O risco / urgência -->
+  <section class="slide lite" data-t="O risco">
+    <div class="eyebrow" style="color:var(--blue-2)">Por que isso é urgente</div>
+    <h2>Cada dia assim é um <span class="accent">risco jurídico</span> —<br>e um problema no Tribunal de Contas.</h2>
+    <div class="law">
+      A <b>Lei de Arquivos (8.159/1991)</b> torna a guarda dos documentos um <b>dever do Poder Público</b> e prevê <b>responsabilização pela perda de documentos de valor permanente</b>. Perder um acervo não é só prejuízo: <b>expõe o gestor</b>.
     </div>
-    <p class="big">Cada computador vira <span class="accentb">mais uma cópia viva</span>. Um quebrou, foi roubado ou está desligado? <span class="accent">Os outros continuam com tudo.</span></p>
-    <p class="lead" style="margin-top:20px">Quanto mais computadores o órgão tem, <b style="color:#fff">mais protegidos</b> ficam os documentos.</p>
+    <p class="punch">A segurança dos documentos da sua cidade não pode esperar mais um mandato.</p>
     <div class="foot"><img src="img/symbol.png" alt="">Softagon SIGAD</div>
   </section>
 
-  <!-- 04 O UAU -->
-  <section class="slide dark" data-t="O UAU">
-    <div class="eyebrow">A demonstração que converte</div>
-    <h2 style="font-size:60px">Eu <span class="accent">desligo a internet</span>…<br>salvo aqui… e <span class="accentb">olha lá</span> — já apareceu no outro PC.</h2>
-    <p class="lead" style="margin-top:30px;font-size:28px">É a "pasta mágica": você salva um arquivo como sempre fez, e ele se replica sozinho pela rede local, <b style="color:#fff">em tempo real</b>. Sem internet. Sem nuvem de ninguém. Sem servidor no meio.</p>
+  <!-- 04 Pasta mágica (a virada) -->
+  <section class="slide dark" data-t="Pasta mágica">
+    <div class="eyebrow">A virada</div>
+    <h2 style="font-size:56px">Você salva <span class="accent">uma vez</span>.<br>Aparece em <span class="accentb">todos</span>. Na hora. Sem internet.</h2>
+    <p class="lead" style="margin-top:26px;font-size:26px">É a <b style="color:#fff">pasta mágica</b>: salve um arquivo como sempre fez e ele se replica sozinho por todos os computadores do órgão, em tempo real, pela rede local. E é <b style="color:#fff">mais fácil que a pasta do Windows</b>.</p>
     <div class="chips">
       <span class="chip">P2P na <span class="d">rede local</span></span>
       <span class="chip">Tempo <span class="d">real</span></span>
@@ -147,80 +164,107 @@
     <div class="foot"><img src="img/symbol.png" alt="">Softagon SIGAD</div>
   </section>
 
-  <!-- 05 Produto real -->
-  <section class="slide lite" data-t="Produto real">
-    <div class="eyebrow" style="color:var(--blue-2)">Não é ideia — é tela real</div>
-    <h2>Leve, bonito e familiar.<br>Roda em <span class="accentb">Windows 11</span> e <span class="accentb">Ubuntu</span>.</h2>
-    <div class="grid g4" style="margin-top:30px">
-      <div class="card"><div class="ic">🔎</div><h3>Busca inteligente</h3><p>Acha por qualquer palavra dentro do documento — até nos escaneados (OCR) e digitando errado.</p></div>
-      <div class="card"><div class="ic">🖊️</div><h3>Assinatura ICP-Brasil</h3><p>Assina com certificado A1 (ou gov.br) e carimba o PDF com data e hora.</p></div>
-      <div class="card"><div class="ic">🔒</div><h3>Privado só seu</h3><p>Documento sensível cifrado por usuário — nem o colega da secretaria, nem o admin abrem.</p></div>
-      <div class="card"><div class="ic">📋</div><h3>Protocolo e trilha</h3><p>Número de protocolo, tramitação entre secretarias e auditoria de quem mexeu e quando.</p></div>
+  <!-- 05 Nuvem privada & soberania -->
+  <section class="slide dark" data-t="Soberania">
+    <div class="eyebrow">Nuvem privada · soberania de dados</div>
+    <h2 style="font-size:58px">Os dados da cidade<br>ficam <span class="accentb">na cidade</span>.</h2>
+    <div class="grid g2" style="margin-top:26px;max-width:1080px">
+      <div class="card"><div class="ic">🏛️</div><h3>Nuvem privada</h3><p>Os documentos vivem nos computadores do próprio órgão. Sem servidor em outro país, sem olhos de terceiros.</p></div>
+      <div class="card"><div class="ic">🔓</div><h3>Sem aprisionamento</h3><p>Você não fica refém de assinatura mensal nem de fornecedor. Exporta quando quiser.</p></div>
+      <div class="card"><div class="ic">⚖️</div><h3>LGPD por desenho</h3><p>O conteúdo nunca sai para a nuvem de empresa nenhuma. Privacidade é o padrão.</p></div>
+      <div class="card"><div class="ic">💰</div><h3>Custo de software ≈ R$ 0</h3><p>Roda no parque que você já tem. Sem servidor novo, sem licença por usuário.</p></div>
     </div>
-    <p class="lead" style="margin-top:24px;font-size:22px">Login por órgão · integridade por hash (selo "verificado") · roda até em Celeron com 4&nbsp;GB.</p>
     <div class="foot"><img src="img/symbol.png" alt="">Softagon SIGAD</div>
   </section>
 
-  <!-- 06 É segurança -->
-  <section class="slide dark" data-t="Reposicionamento">
-    <div class="eyebrow">Não vendemos "sistema de arquivo"</div>
-    <h2 style="font-size:64px">Vendemos <span class="accent">segurança</span>.</h2>
+  <!-- 06 GED vs SIGAD -->
+  <section class="slide lite" data-t="GED × SIGAD">
+    <div class="eyebrow" style="color:var(--blue-2)">Por que um "drive" não basta</div>
+    <h2>Um drive guarda arquivos.<br>Um <span class="accentb">SIGAD</span> protege registros oficiais.</h2>
+    <div class="vs">
+      <div class="col ged">
+        <div class="tag">Drive / GED comum</div>
+        <h3>Só um depósito</h3>
+        <ul>
+          <li>Joga tudo numa pasta</li>
+          <li>Sem classificação nem temporalidade</li>
+          <li>Não prova autenticidade</li>
+          <li>Não registra quem fez o quê</li>
+        </ul>
+      </div>
+      <div class="col sig">
+        <div class="tag" style="color:var(--blue-2)">Softagon SIGAD</div>
+        <h3>Gestão arquivística de verdade</h3>
+        <ul>
+          <li>Classificação + tabela de temporalidade</li>
+          <li>Autenticidade por hash + cadeia de custódia</li>
+          <li>Protocolo, tramitação e trilha de auditoria</li>
+          <li>Conformidade CONARQ / e-ARQ Brasil</li>
+        </ul>
+      </div>
+    </div>
+    <p class="punch">A sua prefeitura precisa de um SIGAD — e ele cabe no orçamento.</p>
+    <div class="foot"><img src="img/symbol.png" alt="">Softagon SIGAD</div>
+  </section>
+
+  <!-- 07 Permissões por secretaria/departamento -->
+  <section class="slide dark" data-t="Permissões">
+    <div class="eyebrow">Cada setor no seu lugar</div>
+    <h2 style="font-size:52px">Cada secretaria vê <span class="accentb">só o que é dela</span>.</h2>
+    <div class="secs">
+      <div class="sec mine"><div class="nm">🟦 Saúde</div><div class="ey">você está aqui · acesso total</div></div>
+      <div class="sec lock"><div class="nm">🔒 Educação</div><div class="ey">fora do seu acesso</div></div>
+      <div class="sec lock"><div class="nm">🔒 Fazenda</div><div class="ey">fora do seu acesso</div></div>
+      <div class="sec lock"><div class="nm">🔒 Gabinete</div><div class="ey">fora do seu acesso</div></div>
+    </div>
+    <div class="grid g3" style="margin-top:22px;max-width:1120px">
+      <div class="card"><div class="ic">🗂️</div><h3>Pasta por secretaria e departamento</h3><p>O RH não enxerga a pasta da Saúde. Cada setor isolado.</p></div>
+      <div class="card"><div class="ic">🔐</div><h3>Privado só seu</h3><p>Documento sensível cifrado por usuário — nem o colega, nem o admin abrem.</p></div>
+      <div class="card"><div class="ic">🛡️</div><h3>Sigilo de verdade</h3><p>A confidencialidade vem da cifra, não de "esconder na lista".</p></div>
+    </div>
+    <div class="foot"><img src="img/symbol.png" alt="">Softagon SIGAD</div>
+  </section>
+
+  <!-- 08 Segurança & conformidade -->
+  <section class="slide dark" data-t="Segurança">
+    <div class="eyebrow">Durma tranquilo</div>
+    <h2 style="font-size:54px">Cada documento, <span class="accent">lacrado</span> e rastreável.</h2>
     <div class="pillars">
-      <div class="pillar"><div class="n">🛡️</div><h3>É seu</h3><p>Os documentos não saem dos computadores do órgão. Sem servidor em outro país.</p></div>
-      <div class="pillar"><div class="n">💾</div><h3>Backup sozinho</h3><p>Toda vez que você salva, a cópia já está nas outras máquinas. Sem lembrar de fazer backup.</p></div>
-      <div class="pillar"><div class="n">♻️</div><h3>Recupera</h3><p>Apagou sem querer? Lixeira e histórico trazem de volta o que foi excluído por engano.</p></div>
-      <div class="pillar"><div class="n">⚖️</div><h3>Dentro da lei</h3><p>Integridade, auditoria, classificação e temporalidade — com a Lei de Arquivos e o e-ARQ como alvo.</p></div>
+      <div class="pillar"><div class="n">✅</div><h3>Selo de integridade</h3><p>Hash em cada documento: qualquer adulteração é detectada — fica "verificado".</p></div>
+      <div class="pillar"><div class="n">🧾</div><h3>Trilha de auditoria</h3><p>Quem abriu, mudou ou tramitou — e quando. Tudo registrado.</p></div>
+      <div class="pillar"><div class="n">🖊️</div><h3>Assinatura ICP-Brasil</h3><p>Assina com A1 ou gov.br e carimba data e hora. Validade jurídica.</p></div>
+      <div class="pillar"><div class="n">♻️</div><h3>Recupera</h3><p>Apagou sem querer? Lixeira e histórico trazem de volta.</p></div>
     </div>
     <div class="foot"><img src="img/symbol.png" alt="">Softagon SIGAD</div>
   </section>
 
-  <!-- 07 O risco -->
-  <section class="slide lite" data-t="O risco">
-    <div class="eyebrow" style="color:var(--blue-2)">Por que agir agora</div>
-    <h2>Hoje, a pasta do Windows<br>é um <span class="accent">passivo jurídico</span>.</h2>
-    <div class="law">
-      A <b>Lei de Arquivos (8.159/1991)</b> faz da guarda documental um <b>dever do Poder Público</b> e prevê <b>responsabilização pela perda de documentos de valor permanente</b>. Guardar o acervo da cidade numa pasta solta — sem backup, sem rastreabilidade — expõe o gestor.
+  <!-- 09 Resiliência + hardware -->
+  <section class="slide dark" data-t="Resiliência">
+    <div class="eyebrow">Backup que se faz sozinho</div>
+    <h2 style="font-size:50px">Quanto mais computadores,<br>mais <span class="accentb">protegida</span> fica a sua cidade.</h2>
+    <div class="pcs">
+      <div class="pc src">🟧</div>
+      <div class="pc has">💻</div><div class="pc has">💻</div><div class="pc has">💻</div>
+      <div class="pc has">💻</div><div class="pc has">💻</div><div class="pc has">💻</div>
+      <div class="pc has">💻</div><div class="pc has">💻</div><div class="pc has">💻</div>
     </div>
-    <p class="lead" style="margin-top:26px;color:#374151">O Softagon SIGAD transforma esse risco em conformidade: cada documento com hash de integridade, trilha de auditoria e cópias vivas em toda a rede.</p>
+    <p class="big">Cada máquina é uma <span class="accentb">cópia viva</span>. Um quebrou, foi roubado ou está desligado? <span class="accent">Os outros continuam com tudo.</span></p>
+    <p class="lead" style="margin-top:18px">E roda no que você já tem — até em computador antigo (Celeron, 4&nbsp;GB de RAM).</p>
     <div class="foot"><img src="img/symbol.png" alt="">Softagon SIGAD</div>
   </section>
 
-  <!-- 08 Modelo & mercado -->
-  <section class="slide lite" data-t="Modelo &amp; mercado">
-    <div class="eyebrow" style="color:var(--blue-2)">Modelo de negócio</div>
-    <h2>O grátis entra pela mão do servidor.<br>O pago se vende sozinho.</h2>
-    <div class="biz">
-      <div class="col free">
-        <div class="tag">Grátis · entra e vira hábito</div>
-        <h3 class="accentb">Tier local / LAN</h3>
-        <ul>
-          <li>Pasta mágica, tempo real e backup automático na rede</li>
-          <li>Busca com OCR, protocolo, tramitação e auditoria</li>
-          <li>Assinatura ICP-Brasil e sigilo por documento</li>
-          <li>Roda no parque existente — custo de software ≈ R$ 0</li>
-        </ul>
-      </div>
-      <div class="col paid">
-        <div class="tag">Pago · quando precisa cruzar a internet</div>
-        <h3 class="accent">Tier nuvem soberana</h3>
-        <ul>
-          <li>Backup fora do prédio (incêndio, enchente, furto)</li>
-          <li>Acesso de fora da rede (home office, outras unidades)</li>
-          <li>Site público de transparência (LAI)</li>
-          <li>Assistente de IA com trava de sigilo · suporte com SLA</li>
-        </ul>
-      </div>
+  <!-- 10 Comece hoje -->
+  <section class="slide dark" data-t="Comece hoje">
+    <div class="eyebrow">Comece agora</div>
+    <div class="close" style="max-width:840px">A sua cidade merece guardar a história dela <span class="accent">com segurança</span>.</div>
+    <p class="cta" style="max-width:840px">Grátis, para <b>Windows 11</b> e <b>Ubuntu</b>. Instale e veja a mágica em minutos:<br><b>softagonsistemas.github.io/sigad-download</b></p>
+    <div class="contact">
+      <span>✉️ <b>vendas@softagon.com.br</b></span>
+      <span>💬 <b>(87) 99118-9300</b></span>
+      <span>🌐 <b>softagon.com.br</b></span>
     </div>
-    <p class="lead" style="margin-top:22px;color:#374151;font-size:21px">Mercado: <b style="color:var(--ink)">milhares</b> de prefeituras, câmaras, autarquias e órgãos públicos no Brasil inteiro.</p>
-    <div class="foot"><img src="img/symbol.png" alt="">Softagon SIGAD</div>
-  </section>
-
-  <!-- 09 Fecho -->
-  <section class="slide dark" data-t="Fecho">
-    <div class="eyebrow">Bora vender</div>
-    <div class="close">Qual prefeitura<br>você liga <span class="accent">primeiro</span>?</div>
-    <p class="cta">A prefeitura precisa disso — e a gente tem <b>24 anos de estrada</b> com o setor público.<br>Baixe grátis: <b>softagonsistemas.github.io/sigad-download</b></p>
-    <div class="foot"><img src="img/symbol.png" alt="">Softagon Sistemas · vendas@softagon.com.br · (87) 99118-9300</div>
+    <img class="mascot fecho" src="img/mascot.png" alt="">
+    <div class="foot"><img src="img/symbol.png" alt="">Softagon Sistemas · 24 anos com o setor público</div>
   </section>
 
 </div>
@@ -228,7 +272,7 @@
 
 <div id="hud">
   <button id="prev" aria-label="Anterior">◀</button>
-  <span id="count">1 / 9</span>
+  <span id="count">1 / 10</span>
   <div id="dots"></div>
   <button id="next" aria-label="Próximo">▶</button>
 </div>
@@ -253,11 +297,9 @@
     count.textContent = (i+1) + ' / ' + n;
   }
   function fit(){
-    var pad = 24;
-    var sx = (window.innerWidth - pad) / 1280;
+    var sx = (window.innerWidth - 24) / 1280;
     var sy = (window.innerHeight - 70) / 720;
-    var s = Math.min(sx, sy);
-    deck.style.transform = 'scale(' + s + ')';
+    deck.style.transform = 'scale(' + Math.min(sx, sy) + ')';
   }
   document.getElementById('next').addEventListener('click', function(){ go(i+1); });
   document.getElementById('prev').addEventListener('click', function(){ go(i-1); });
